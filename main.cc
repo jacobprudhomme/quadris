@@ -61,26 +61,26 @@ int main(int argc, char *argv[]) {
     bool usingrandom = true;
 
     for(int x = 1; x < argc; ++x){
-        if(argv[x] == "-text"){
+        if (argv[x] == "-text"){
              text = true;
-        }else if(argv[x] == "-seed"){
+        } else if (argv[x] == "-seed"){
             istringstream iss {argv[x+1]};
-            if(!(iss>>seed)){
+            if (!(iss>>seed)){
                 "Please enter a correct seed";
                 return 1;
             }
             usingseed = true;
             ++x;
-        }else if(argv[x] == "-scriptfile" ){
+        } else if (argv[x] == "-scriptfile" ){
             fileused = true;
                 filename = argv[x+1];
             ++x;
-        }else if(argv[x] == "-startlevel"){
+        } else if (argv[x] == "-startlevel"){
             istringstream iss {argv[x+1]};
-            if(!(iss>>level)){
+            if (!(iss>>level)){
                 "Please enter a correct level";
                 return 1;
-            }else if(level > 4 || level < 0){
+            } else if (level > 4 || level < 0) {
                 "Please enter a valid level";
             }
             ++x;
@@ -105,134 +105,132 @@ int main(int argc, char *argv[]) {
     string s;
     string file;
     string seqfile;
+
     while (cin >> s) {
-         istringstream iss {s};
-        iss>>mult;
+        istringstream iss{s};
+        iss >> mult;
 
-        if(s.compare(0,3,left) == 0){
+        if (s.compare(0,3,left) == 0) {
            //move left
-        }else if(s.compare(0,2,right) == 0){
+        } else if (s.compare(0,2,right) == 0) {
           //move right
-        }else if(s.compare(0,2,down) == 0){
+        } else if (s.compare(0,2,down) == 0) {
             //move down
-        }else if(s.compare(0,2,cw) == 0){
+        } else if (s.compare(0,2,cw) == 0) {
 
-        }else if(s.compare(0,2,ccw) == 0){
+        } else if (s.compare(0,2,ccw) == 0) {
 
+        } else if (s.compare(0,2,drop) == 0) {
 
-        }else if(s.compare(0,2,drop) == 0){
-
-        }else if(s.compare(0,6,levelup) == 0) {
+        } else if (s.compare(0,6,levelup) == 0) {
             if (mult >= 0) {
-            level += mult;
-           }
-            if(level >= 4){
-                level = 4;
+              level += mult;
             }
 
-        }else if(s.compare(0,6,leveldown) == 0){
+            if (level >= 4) {
+              level = 4;
+            }
+
+        } else if (s.compare(0,6,leveldown) == 0) {
             if (mult >= 0) {
                 level -= mult;
             }
-            if(level <= 0){
+
+            if (level <= 0) {
                 level = 0;
             }
-        }else if(s.compare(0,1,norandom) == 0){
-            cin>>file;
+        } else if (s.compare(0,1,norandom) == 0) {
+          cin >> file;
           usingrandom = false;
-        }else if(s.compare(0,2,random) == 0){
+        } else if (s.compare(0,2,random) == 0) {
             usingrandom = true;
-        }else if(s.compare(0,1,sequence) == 0){
-             cin>>seqfile;
-            ifstream f(seqfile);
+        } else if (s.compare(0,1,sequence) == 0) {
+            cin >> seqfile;
+            ifstream f{seqfile};
 
             string commands;
 
-            while(f>>commands){
+            while (f>>commands) {
               istringstream isss{commands};
-              while(isss>> s){
+              while (isss >> s) {
 
-                  if(iss >> mult){
-                      
+                  if (iss >> mult) {
+
                   }
 
-                  if(s.compare(0,3,left) == 0){
+                  if (s.compare(0,3,left) == 0) {
                       //move left
-                  }else if(s.compare(0,2,right) == 0){
+                  } else if (s.compare(0,2,right) == 0) {
                       //move right
-                  }else if(s.compare(0,2,down) == 0){
+                  } else if (s.compare(0,2,down) == 0) {
                       //move down
-                  }else if(s.compare(0,2,cw) == 0){
+                  } else if (s.compare(0,2,cw) == 0) {
 
-                  }else if(s.compare(0,2,ccw) == 0){
+                  } else if (s.compare(0,2,ccw) == 0) {
 
+                  } else if (s.compare(0,2,drop) == 0) {
 
-                  }else if(s.compare(0,2,drop) == 0){
-
-                  }else if(s.compare(0,6,levelup) == 0) {
+                  } else if (s.compare(0,6,levelup) == 0) {
                       if (mult >= 0) {
                           level += mult;
                       }
-                      if(level >= 4){
+
+                      if (level >= 4) {
                           level = 4;
                       }
-
-                  }else if(s.compare(0,6,leveldown) == 0){
+                  } else if (s.compare(0,6,leveldown) == 0) {
                       if (mult >= 0) {
                           level -= mult;
                       }
-                      if(level <= 0){
+
+                      if (level <= 0) {
                           level = 0;
                       }
-                  }else if(s.compare(0,1,norandom) == 0){
-                      cin>>file;
+                  } else if (s.compare(0,1,norandom) == 0) {
+                      cin >> file;
                       usingrandom = false;
-                  }else if(s.compare(0,2,random) == 0){
+                  } else if (s.compare(0,2,random) == 0) {
                       usingrandom = true;
-                  }else if(s.compare(0,2,restart) == 0){
+                  } else if (s.compare(0,2,restart) == 0) {
 
-                  }else if(s.compare(0,1,hint) == 0){
+                  } else if (s.compare(0,1,hint) == 0) {
 
-                  }else if(s.compare(0,1,"I") == 0){
+                  } else if (s.compare(0,1,"I") == 0) {
 
-                  }else if(s.compare(0,1,"J") == 0){
+                  } else if (s.compare(0,1,"J") == 0) {
 
-                  }else if(s.compare(0,1,"O") == 0){
+                  } else if (s.compare(0,1,"O") == 0) {
 
-                  }else if(s.compare(0,1,"S") == 0){
+                  } else if (s.compare(0,1,"S") == 0) {
 
-                  }else if(s.compare(0,1,"Z") == 0){
+                  } else if (s.compare(0,1,"Z") == 0) {
 
-                  }else if(s.compare(0,1,"T") == 0){
+                  } else if (s.compare(0,1,"T") == 0) {
 
-                  }else if(s.compare(0,1,"L") == 0){
+                  } else if (s.compare(0,1,"L") == 0) {
 
                   }
               }
-
-
-
-
             }
 
 
-        }else if(s.compare(0,2,restart) == 0){
+        } else if (s.compare(0,2,restart) == 0) {
               //restart grid
-        }else if(s.compare(0,1,hint) == 0){
+        } else if (s.compare(0,1,hint) == 0) {
              //hint
-        }else if(s.compare(0,1,"I") == 0){
+        } else if (s.compare(0,1,"I") == 0) {
             //insert I block
-        }else if(s.compare(0,1,"J") == 0){
+        } else if (s.compare(0,1,"J") == 0) {
                //insert J block
-        }else if(s.compare(0,1,"O") == 0){
+        } else if (s.compare(0,1,"O") == 0) {
             //insert O block
-        }else if(s.compare(0,1,"S") == 0){
+        } else if (s.compare(0,1,"S") == 0) {
             //insert S block
-        }else if(s.compare(0,1,"Z") == 0){
+        } else if (s.compare(0,1,"Z") == 0) {
              //insert Z block
-        }else if(s.compare(0,1,"T") == 0){
+        } else if (s.compare(0,1,"T") == 0) {
              //insert T block
-        }else if(s.compare(0,1,"L") == 0){
+        } else if (s.compare(0,1,"L") == 0) {
                //insert L block
         }
 
