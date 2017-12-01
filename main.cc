@@ -102,11 +102,12 @@ int main(int argc, char *argv[]) {
     string sequence = "s"; //sequence fiel(s)
     string restart = "re";//restart(re)
     string hint = "h";//hint(h)
-    while (cin >> mult) {
-        string file;
-        string seqfile;
-        string s;
-        cin >> s;
+    string s;
+    string file;
+    string seqfile;
+    while (cin >> s) {
+         istringstream iss {s};
+        iss>>mult;
 
         if(s.compare(0,3,left) == 0){
            //move left
@@ -148,10 +149,12 @@ int main(int argc, char *argv[]) {
             string commands;
 
             while(f>>commands){
-              istringstream iss{commands};
-              while(iss>> mult){
+              istringstream isss{commands};
+              while(isss>> s){
 
-                  iss >> s;
+                  if(iss >> mult){
+                      
+                  }
 
                   if(s.compare(0,3,left) == 0){
                       //move left
@@ -234,6 +237,4 @@ int main(int argc, char *argv[]) {
         }
 
     }
-
-
 }
