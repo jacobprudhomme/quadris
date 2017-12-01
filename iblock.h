@@ -2,23 +2,13 @@
 #define IBLOCK
 
 #include <vector>
-#include "blocks.h"
+#include "block.h"
 #include <iostream>
 #include <string>
 
-class IBlock: public Blocks {
-    int length;
-    int width;
-    int level;
-    vector<vector<char>> piece;
+class IBlock: public Block {
 public:
-    void clockwise() override;
-    void antiClockwise() override;
-    std::string prettyprint() override;
-    void moveLeftIBlock();
-    void moveRightIBlock();
-    void moveDownIBlock();
-    //std::vector<XYCor> getXYCor() override;
+   IBlock();
 };
 
 #endif

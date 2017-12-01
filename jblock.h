@@ -2,25 +2,19 @@
 #define JBLOCK
 
 #include <vector>
-#include "blocks.h"
+#include "block.h"
 #include <iostream>
 #include <string>
 #include <sstream>
 
-class JBlock: public Blocks {
-
-    int length;
-    int width;
-    int level;
-    vector<vector<char > > piece;
+class JBlock: public Block {
 public:
-    void clockwise() override;
-    void antiClockwise() override;
-    std::string prettyprint() override;
-    void moveLeftJBlock();
-    void moveRighJIBlock();
-    void moveDownJBlock();
-    //std::vector<XYCor> getXYCor();
+    JBlock();
+
+
+public:
+
+
 };
 
 #endif
