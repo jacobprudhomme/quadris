@@ -6,4 +6,4 @@
 #include "zblock.h"
 
 
-ZBlock::ZBlock() : Block(2, 3, vector<XYCor> {XYCor{0,0},XYCor{0,1},XYCor{1,1},XYCor{1,2}}) {}
+ZBlock::ZBlock(int level) : Block(2, 3, vector<XYCor> {XYCor{0,0},XYCor{0,1},XYCor{1,1},XYCor{1,2}}),level{level} {}

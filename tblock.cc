@@ -6,5 +6,5 @@
 #include "tblock.h"
 
 
-TBlock::TBlock():Block{2,3,vector<XYCor> {XYCor{0,0},XYCor{0,1},XYCor{0,2},XYCor{1,1}}}{
+TBlock::TBlock(int level):Block{2,3,vector<XYCor> {XYCor{0,0},XYCor{0,1},XYCor{0,2},XYCor{1,1}}},level{level}{
 }

@@ -7,4 +7,4 @@
 
 
 
-JBlock::JBlock() : Block(2, 3, vector<XYCor> {XYCor{0,0},XYCor{1,0},XYCor{1,1},XYCor{1,2}}) {}
+JBlock::JBlock(int level) : Block(2, 3, vector<XYCor> {XYCor{0,0},XYCor{1,0},XYCor{1,1},XYCor{1,2}}),level{level} {}
