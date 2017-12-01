@@ -5,7 +5,7 @@
 #include "observer.h"
 
 class TextDisplay : public Observer {
-  std::vector<string> scoreDisp;
+  std::vector<std::string> scoreDisp;
   std::vector<std::vector<char>> gridDisp;
   std::vector<char> upcomingDisp;
 
