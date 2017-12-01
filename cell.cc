@@ -1,10 +1,11 @@
-#include <iostream>
-#include <vector>
-#include <cstddef>
 #include "cell.h"
 #include "info.h"
 
-Cell::Cell(int r, int c, bool b): r{r}, c{c}, b{b} {};
+Cell::Cell(int r, int c, bool b): r{r}, c{c} {};
+
+void Cell::toggle() {
+  containsBlock = !containsBlock;
+}
 
 bool Cell::isBlock() {
   return containsBlock;

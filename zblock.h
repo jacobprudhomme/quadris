@@ -1,23 +1,26 @@
-#ifndef ZBLOCK
-#define ZBLOCK
+#ifndef ZBLOCK_H
+#define ZBLOCK_H
 
 #include <vector>
-#include "blocks.h"
 #include <iostream>
 #include <string>
 #include <sstream>
 
-class ZBlock: public Blocks {
+#include "block.h"
 
-    int length;
-    int width;
-    int level;
-    vector<vector<char > > piece;
-public:
+class ZBlock : public Block {
+  std::vector<int> xCoord{0,1,1,2};
+  std::vector<int> yCoord{0,0,1,1};
+
+  public:
+    void moveLeft() override;
+    void moveRight() override;
+    void moveDown() override;
+
     void clockwise() override;
-    void antiClockwise() override;
-    string prettyprint() override;
+    void counterClockwise() override;
 
+    std::string prettyprint() override;
 };
 
 #endif

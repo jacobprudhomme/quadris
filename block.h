@@ -26,4 +26,5 @@ public:
     int getwidth();
 
 };
+
 #endif
