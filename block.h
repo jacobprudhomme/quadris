@@ -11,9 +11,11 @@ class Block {
     virtual void moveDown() = 0;
 
     virtual void clockwise() = 0;
-    virtual void antiClockwise() = 0;
+    virtual void counterClockwise() = 0;
 
     virtual std::string prettyprint() = 0;
+
+    virtual ~Block() = default;
 };
 
 #endif
