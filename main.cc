@@ -1,15 +1,57 @@
 #include <iostream>
+#include <fstream>
 #include <sstream>
 #include <string>
+#include <vector>
+
 #include "sblock.h"
 #include "tblock.h"
-#include <vector>
-#include <fstream>
+#include "score.h"
+#include "upcoming.h"
+
 using namespace std;
 
+// Necessary to initialize the Score singleton
+Score *Score::singleton_instance = 0;
+Upcoming *Upcoming::singleton_instance = 0;
+
+/*
+#include "score.h"
+#include "upcoming.h"
+#include "textdisplay.h"
+
+using namespace std;
+
+// Necessary to initialize the Score singleton
+Score *Score::singleton_instance = 0;
+Upcoming *Upcoming::singleton_instance = 0;
+
+int main() {
+  TextDisplay *td = new TextDisplay{};
+
+  cout << *td;
+
+  Upcoming::instance()->setNextBlocks('I');
+
+  cout << *td;
+
+  Upcoming::instance()->setNextBlocks('J');
+  Upcoming::instance()->setNextBlocks('Z');
+
+  // Anywhere you want to update the score or level,
+  // include "score.h" and use these methods like so:
+  // (there are also getters)
+  Score::instance()->setScore(5);
+  Score::instance()->setHiScore(5);
+  Score::instance()->setLevel(1);
+
+  cout << *td;
+
+  return 0;
+}
+*/
+
 int main(int argc, char *argv[]) {
-
-
     int level = 0;
     bool text = false;
     bool usingseed = false;
@@ -18,7 +60,7 @@ int main(int argc, char *argv[]) {
     string filename;
     bool usingrandom = true;
 
-    for(int x = 1;x<argc;++x){
+    for(int x = 1; x < argc; ++x){
         if(argv[x] == "-text"){
              text = true;
         }else if(argv[x] == "-seed"){
@@ -70,7 +112,7 @@ int main(int argc, char *argv[]) {
            //move left
         }else if(s.compare(0,2,right) == 0){
           //move right
-        }else if(s.compare(0,2,down) == 0){ 
+        }else if(s.compare(0,2,down) == 0){
             //move down
         }else if(s.compare(0,2,cw) == 0){
 
@@ -193,5 +235,5 @@ int main(int argc, char *argv[]) {
 
     }
 
-    
+
 }
