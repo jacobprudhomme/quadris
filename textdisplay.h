@@ -4,12 +4,11 @@
 #include <iostream>
 #include <string>
 #include <vector>
+
 #include "observer.h"
 
 class TextDisplay : public Observer {
-  std::vector<std::string> scoreDisp;
   std::vector<std::vector<char>> gridDisp;
-  std::vector<std::string> upcomingDisp;
 
   public:
     TextDisplay();
