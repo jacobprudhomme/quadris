@@ -1,5 +1,6 @@
 #include "textdisplay.h"
 #include "score.h"
+#include "upcoming.h"
 
 using namespace std;
 
@@ -31,9 +32,9 @@ ostream &operator<<(ostream &out, const TextDisplay &td) {
   }
 
   out << "-----------" << endl;
-  out << "next block" << endl;
-  out << "next block" << endl;
-  out << "next block" << endl;
+  out << Upcoming::instance()->getNextBlocks().at(0) << endl;
+  out << Upcoming::instance()->getNextBlocks().at(1) << endl;
+  out << Upcoming::instance()->getNextBlocks().at(2) << endl;
 
   return out;
 }

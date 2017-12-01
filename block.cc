@@ -1,114 +1,97 @@
-#include "block.h"
+#include <string>
+#include <iostream>
 
-#include <utility>
-
-vector<XYCor>  Block::getpos() {
-return pos;
+//Simply returns the vector for the x and y cordinates
+vector<XYCor> Blocks::getXYCor() {
+  vector<XYCor> v;
+  for(int i = 0; i < length; ++i) {
+    for(int j = 0; j < width; ++j) {
+      if(piece[i][j] == 'B') {//or whatever we are looking at in the vector<vector <char>>
+        XYCor xy = {i, j};
+        v.emplace_back(xy);
+      }
+    }
+  }
 }
 
-int Block::getlength() {
-return length;
+
+void Blocks::moveLeft()  {
+  vector<XYCor> temp = getXYCor();
+  //moving left decrementing x
+  for(auto &n : temp) {
+    (n.x)--;
+  }
+
+  int len = temp.size();
+  //we know where in the vector we have chars
+  piece.clear();
+  //we just need to place them at the right spot which will be
+  //subtracting 1 from the current x's location
+  int counter = 0;
+  for(int i = 0; i < length; i++) {
+    for(int j = 0; j < width; ++j) {
+      if(counter == len - 1) return;
+      if(i == temp[counter].x && j == temp[counter].y) {
+        piece[i][j] = 'B'; //or some char which represent that there is a block
+        counter++;
+      } else {
+        piece[i][j] = ' '; //or some char which represent that there is not a block
+      }
+    }
+  }
 }
 
-int Block::getwidth() {
-    return width;
+
+
+void Blocks::moveRight()  {
+  vector<XYCor> temp = getXYCor();
+  //moving right incrementing x
+  for(auto &n : temp) {
+    (n.x)++;
+  }
+
+  int len = temp.size();
+  //we know where in the vector we have chars
+  piece.clear();
+  //we just need to place them at the right spot which will be
+  //subtracting 1 from the current x's location
+  int counter = 0;
+  for(int i = 0; i < length; i++) {
+    for(int j = 0; j < width; ++j) {
+      if(counter == len - 1) return;
+      if(i == temp[counter].x && j == temp[counter].y) {
+        piece[i][j] = 'B'; //or some char which represent that there is a block
+        counter++;
+      } else {
+        piece[i][j] = ' '; //or some char which represent that there is not a block
+      }
+    }
+  }
 }
 
-void Block::clockwise(){
 
-    vector<XYCor>  temp;//make a temporary 2d vector
+void Blocks::moveDown() {
+  vector<XYCor> temp = getXYCor();
+  //moving down incrementing y
+  for(auto &n : temp) {
+    (n.y)++;
+  }
 
-    temp.resize(4);//resize length
-
-        for(int y = 0;y<4;++y){
-            XYCor blank = {0,0};
-            temp.emplace_back(blank);//fill with empty data
-        }
-
-
-        for(int k = 0;k<4;++k){
-            temp[k].x = getpos()[k].y;//replace with correct data
-            temp[k].y = width-1-getpos()[k].x;
-        }
-
-
-    getpos() = temp;//reassign
-
-    int temp1 = length;
-    this->length = width;     //swap length and width
-    this->width = temp1;
-
-    notifyObservers();
-
-}
-
-void Block::moveleft() {
-
-    for(int x1 = 0;x1<4;++x1){
-        if(getpos()[x1].x <= 0 ){
-            return;
-        }
+  int len = temp.size();
+  //we know where in the vector we have chars
+  piece.clear();
+  //we just need to place them at the right spot which will be
+  //subtracting 1 from the current x's location
+  int counter = 0;
+  for(int i = 0; i < length; i++) {
+    for(int j = 0; j < width; ++j) {
+      if(counter == len - 1) return;
+      if(i == temp[counter].x && j == temp[counter].y) {
+        piece[i][j] = 'B'; //or some char which represent that there is a block
+        counter++;
+      } else {
+        piece[i][j] = ' '; //or some char which represent that there is not a block
+      }
     }
-
-    for(int x2 = 0;x2<=4;++x2){
-        --getpos()[x2].x;
-    }
-    notifyObservers();
-}
-
-void Block::moveright() {
-    for(int x1 = 0;x1<4;++x1){
-        if(getpos()[x1].x >= 10 ){
-            return;
-        }
-    }
-
-    for(int x2 = 0;x2<=4;++x2){
-        ++getpos()[x2].x;
-    }
-    notifyObservers();
-}
-
-void Block::movedown() {
-    for(int x1 = 0;x1<4;++x1){
-        if(getpos()[x1].x >= 14 ){
-            return;
-        }
-    }
-
-    for(int x2 = 0;x2<=4;++x2){
-        ++getpos()[x2].y;
-    }
-    notifyObservers();
-}
-
-void Block::antiClockwise() {
-
-    vector<XYCor>  temp;//make a temporary 2d vector
-
-    temp.resize(4);//resize length
-
-    for(int y = 0;y<4;++y){
-        XYCor blank = {0,0};
-        temp.emplace_back(blank);//fill with empty data
-    }
-
-
-    for(int k = 0;k<4;++k){
-        temp[k].x = length - 1 - getpos()[k].y;//replace with correct data
-        temp[k].y = getpos()[k].x;
-    }
-
-
-    getpos() = temp;//reassign
-
-    int temp1 = length;
-    this->length = width;     //swap length and width
-    this->width = temp1;
-    notifyObservers();
-
-}
-
-Block::Block(int length, int width, vector<XYCor> pos):length{length},width{width},pos{std::move(pos)} {
-
+  }
 }
