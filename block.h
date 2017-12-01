@@ -2,7 +2,6 @@
 #define BLOCK_H
 
 #include <iostream>
-#include <string>
 #include <vector>
 
 struct XYCoord {
@@ -23,7 +22,7 @@ class Block {
     void moveright();
     void movedown();
 
-    vector<XYCor> getPos();
+    std::vector<XYCoord> getPos();
     int getLength();
     int getWidth();
 };

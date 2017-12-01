@@ -3,13 +3,15 @@
 
 #include "block.h"
 
+using namespace std;
+
 //Simply returns the vector for the x and y cordinates
-vector<XYCor> Blocks::getXYCor() {
-  vector<XYCor> v;
+vector<XYCoord> Block::getPos() {
+  vector<XYCoord> v;
   for(int i = 0; i < length; ++i) {
     for(int j = 0; j < width; ++j) {
       if(piece[i][j] == 'B') {//or whatever we are looking at in the vector<vector <char>>
-        XYCor xy = {i, j};
+        XYCoord xy = {i, j};
         v.emplace_back(xy);
       }
     }
@@ -17,8 +19,8 @@ vector<XYCor> Blocks::getXYCor() {
 }
 
 
-void Blocks::moveLeft()  {
-  vector<XYCor> temp = getXYCor();
+void Block::moveLeft()  {
+  vector<XYCoord> temp = getPos();
   //moving left decrementing x
   for(auto &n : temp) {
     (n.x)--;
@@ -45,8 +47,8 @@ void Blocks::moveLeft()  {
 
 
 
-void Blocks::moveRight()  {
-  vector<XYCor> temp = getXYCor();
+void Block::moveRight()  {
+  vector<XYCoord> temp = getPos();
   //moving right incrementing x
   for(auto &n : temp) {
     (n.x)++;
@@ -72,8 +74,8 @@ void Blocks::moveRight()  {
 }
 
 
-void Blocks::moveDown() {
-  vector<XYCor> temp = getXYCor();
+void Block::moveDown() {
+  vector<XYCoord> temp = getPos();
   //moving down incrementing y
   for(auto &n : temp) {
     (n.y)++;
