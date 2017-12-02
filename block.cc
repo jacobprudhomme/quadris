@@ -2,12 +2,10 @@
 
 using namespace std;
 
-Block::Block(vector<Coord> pos, int length, int width,TextDisplay td,Board b):
-  pos{pos}, length{length}, width{width},id{numblockid++} {
-    // TODO: Attach TextDisplay and Grid as observers
-    this->attach(td);
-    this->attach(b);
-
+Block::Block(vector<Coord> pos, int length, int width, TextDisplay *td, Board *b):
+  pos{pos}, length{length}, width{width}, id{numblockid++} {
+    attach(td);
+    attach(b);
   }
 
 vector<Coord> Block::getPos() { return pos; }

@@ -21,7 +21,7 @@ class Block : public Subject {
     Board *b = nullptr;
 
   public:
-    Block(std::vector<Coord> pos, int length, int width, TextDisplay td, Board b);
+    Block(std::vector<Coord> pos, int length, int width, TextDisplay *td, Board *b);
 
     std::vector<Coord> getPos();
     int getLength();
