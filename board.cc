@@ -1,7 +1,9 @@
 #include <iostream>
 #include <vector>
 #include <cstddef>
+
 #include "cell.h"
+
 using namespace std;
 
 Board::~Board () {

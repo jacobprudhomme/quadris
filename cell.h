@@ -1,13 +1,16 @@
 #ifndef CELL_H
 #define CELL_H
+
 #include <iostream>
 #include <string>
 #include <vector>
 #include <cstddef>
-#include "Block.h"
+
+#include "block.h"
+#include "observer.h"
 
 
-class Cell {
+class Cell : public Observer {
   int r; //which row is this at
   int c; //which column is it at
   bool containsBlock; //does it contain a block or not
