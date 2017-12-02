@@ -1,114 +1,83 @@
 #include "block.h"
 
-#include <utility>
+using namespace std;
 
-vector<XYCor>  Block::getpos() {
-return pos;
+Block::Block(vector<Coord> pos, int length, int width,TextDisplay td,Board b):
+  pos{pos}, length{length}, width{width},id{numblockid++} {
+    // TODO: Attach TextDisplay and Grid as observers
+    this->attach(td);
+    this->attach(b);
+
+  }
+
+vector<Coord> Block::getPos() { return pos; }
+
+int Block::getLength() { return length; }
+
+int Block::getWidth() { return width; }
+
+void Block::setPos(vector<Coord> newPos) { pos = newPos; notifyObservers(); }
+
+void Block::setLength(int newLength) { length = newLength; }
+
+void Block::setWidth(int newWidth) { width = newWidth; }
+
+void Block::moveLeft()  {
+  vector<Coord> temp = getPos();
+
+  bool atLeftEdge = false;
+
+  // Moving left by decrementing x if not already at leftmost edge
+  for (Coord n : temp) {
+    if (n.x == 0) atLeftEdge = true;
+  }
+  if (!atLeftEdge) {
+    for (Coord &n : temp) {
+      (n.x)--;
+    }
+  }
+
+  pos = temp;
+
+  notifyObservers();
 }
 
-int Block::getlength() {
-return length;
+void Block::moveRight()  {
+  vector<Coord> temp = getPos();
+
+  bool atRightEdge = false;
+
+  // Moving right by incrementing x if not already at rightmost edge
+  for (Coord n : temp) {
+    if (n.x == 10) atRightEdge = true;
+  }
+  if (!atRightEdge) {
+    for (Coord &n : temp) {
+      (n.x)++;
+    }
+  }
+
+  pos = temp;
+
+  notifyObservers();
 }
 
-int Block::getwidth() {
-    return width;
-}
+void Block::moveDown()  {
+  vector<Coord> temp = getPos();
 
-void Block::clockwise(){
+  bool atBottomEdge = false;
 
-    vector<XYCor>  temp;//make a temporary 2d vector
-
-    temp.resize(4);//resize length
-
-        for(int y = 0;y<4;++y){
-            XYCor blank = {0,0};
-            temp.emplace_back(blank);//fill with empty data
-        }
-
-
-        for(int k = 0;k<4;++k){
-            temp[k].x = getpos()[k].y;//replace with correct data
-            temp[k].y = width-1-getpos()[k].x;
-        }
-
-
-    getpos() = temp;//reassign
-
-    int temp1 = length;
-    this->length = width;     //swap length and width
-    this->width = temp1;
-
-    notifyObservers();
-
-}
-
-void Block::moveleft() {
-
-    for(int x1 = 0;x1<4;++x1){
-        if(getpos()[x1].x <= 0 ){
-            return;
-        }
+  // Moving down by incrementing y if not already at bottom
+  for (Coord n : temp) {
+    if (n.y == 14) atBottomEdge = true;
+  }
+  if (!atBottomEdge) {
+    for (Coord &n : temp) {
+      (n.y)++;
     }
+  }
 
-    for(int x2 = 0;x2<=4;++x2){
-        --getpos()[x2].x;
-    }
-    notifyObservers();
-}
+  pos = temp;
 
-void Block::moveright() {
-    for(int x1 = 0;x1<4;++x1){
-        if(getpos()[x1].x >= 10 ){
-            return;
-        }
-    }
-
-    for(int x2 = 0;x2<=4;++x2){
-        ++getpos()[x2].x;
-    }
-    notifyObservers();
-}
-
-void Block::movedown() {
-    for(int x1 = 0;x1<4;++x1){
-        if(getpos()[x1].x >= 14 ){
-            return;
-        }
-    }
-
-    for(int x2 = 0;x2<=4;++x2){
-        ++getpos()[x2].y;
-    }
-    notifyObservers();
-}
-
-void Block::antiClockwise() {
-
-    vector<XYCor>  temp;//make a temporary 2d vector
-
-    temp.resize(4);//resize length
-
-    for(int y = 0;y<4;++y){
-        XYCor blank = {0,0};
-        temp.emplace_back(blank);//fill with empty data
-    }
-
-
-    for(int k = 0;k<4;++k){
-        temp[k].x = length - 1 - getpos()[k].y;//replace with correct data
-        temp[k].y = getpos()[k].x;
-    }
-
-
-    getpos() = temp;//reassign
-
-    int temp1 = length;
-    this->length = width;     //swap length and width
-    this->width = temp1;
-    notifyObservers();
-
-}
-
-Block::Block(int length, int width, vector<XYCor> pos):length{length},width{width},pos{std::move(pos)} {
-
+  notifyObservers();
 }

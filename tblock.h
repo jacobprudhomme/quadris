@@ -8,11 +8,13 @@
 #include <sstream>
 
 class TBlock: public Block {
+    int level;
 
 public:
     TBlock();
 
-
+    void clockwise() override;
+    void antiClockwise() override;
 };
 
 #endif
