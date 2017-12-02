@@ -7,8 +7,9 @@
 
 using namespace std;
 
-TBlock::TBlock() :  Block{vector<Coord> {Coord{0,0}, Coord{0,1}, Coord{0,2}, Coord{0,3}}, 1, 4,td,b},
-                    level{Score::instance()->getLevel()} {}
+TBlock::TBlock(TextDisplay *td, Board *b):
+  Block{vector<Coord> {Coord{0,0}, Coord{0,1}, Coord{0,2}, Coord{0,3}}, 1, 4, td, b},
+  level{Score::instance()->getLevel()} {}
 
 void TBlock::clockwise() {
     vector<Coord> temp = getPos();

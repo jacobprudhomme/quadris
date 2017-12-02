@@ -8,8 +8,9 @@
 
 using namespace std;
 
-OBlock::OBlock() :  Block{vector<Coord> {Coord{0,0}, Coord{0,1}, Coord{0,2}, Coord{0,3}}, 1, 4,td,b},
-                    level{Score::instance()->getLevel()} {}
+OBlock::OBlock(TextDisplay *td, Board *b):
+  Block{vector<Coord> {Coord{0,0}, Coord{0,1}, Coord{0,2}, Coord{0,3}}, 1, 4, td, b},
+  level{Score::instance()->getLevel()} {}
 
 void OBlock::clockwise() {
     vector<Coord> temp = getPos();
@@ -60,4 +61,3 @@ void OBlock::antiClockwise() {
         setPos(temp);
     }
 }
-

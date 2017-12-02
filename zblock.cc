@@ -8,8 +8,9 @@
 
 using namespace std;
 
-ZBlock::ZBlock() :  Block{vector<Coord> {Coord{0,0}, Coord{0,1}, Coord{0,2}, Coord{0,3}}, 1, 4,td,b},
-                    level{Score::instance()->getLevel()} {}
+ZBlock::ZBlock(TextDisplay *td, Board *b):
+  Block{vector<Coord> {Coord{0,0}, Coord{0,1}, Coord{0,2}, Coord{0,3}}, 1, 4, td, b},
+  level{Score::instance()->getLevel()} {}
 
 void ZBlock::clockwise() {
     vector<Coord> temp = getPos();
@@ -59,3 +60,4 @@ void ZBlock::antiClockwise() {
         setWidth(length);
         setPos(temp);
     }
+}

@@ -11,7 +11,7 @@ class ZBlock: public Block {
     int level;
 
 public:
-    ZBlock();
+    ZBlock(TextDisplay *td, Board *b);
 
     void clockwise() override;
     void antiClockwise() override;

@@ -7,7 +7,7 @@ class IBlock : public Block {
   int level;
 
   public:
-    IBlock();
+    IBlock(TextDisplay *td, Board *b);
 
     void clockwise() override;
     void antiClockwise() override;

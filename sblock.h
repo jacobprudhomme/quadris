@@ -10,7 +10,7 @@ class SBlock: public Block {
     int level;
 
 public:
-    SBlock();
+    SBlock(TextDisplay *td, Board *b);
 
     void clockwise() override;
     void antiClockwise() override;

@@ -1,13 +1,12 @@
 #include "jblock.h"
-#include "score.h"
 
 #include <vector>
 #include "score.h"
 
 using namespace std;
 
-JBlock::JBlock():
-  Block{vector<Coord> {Coord{0,0}, Coord{0,1}, Coord{1,1}, Coord{2,1}}, 2, 3},
+JBlock::JBlock(TextDisplay *td, Board *b):
+  Block{vector<Coord> {Coord{0,0}, Coord{0,1}, Coord{1,1}, Coord{2,1}}, 2, 3, td, b},
   level{Score::instance()->getLevel()} {}
 
 void JBlock::clockwise() {

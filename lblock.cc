@@ -8,8 +8,9 @@
 
 using namespace std;
 
-LBlock::LBlock() :  Block{vector<Coord> {Coord{0,0}, Coord{0,1}, Coord{0,2}, Coord{0,3}}, 1, 4,td,b},
-                    level{Score::instance()->getLevel()} {}
+LBlock::LBlock(TextDisplay *td, Board *b):
+  Block{vector<Coord> {Coord{0,0}, Coord{0,1}, Coord{0,2}, Coord{0,3}}, 1, 4, td, b},
+  level{Score::instance()->getLevel()} {}
 
 void LBlock::clockwise() {
     vector<Coord> temp = getPos();
