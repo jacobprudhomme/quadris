@@ -1,97 +1,63 @@
-#include <string>
-#include <iostream>
+#include "block.h"
 
-//Simply returns the vector for the x and y cordinates
-vector<XYCor> Blocks::getXYCor() {
-  vector<XYCor> v;
-  for(int i = 0; i < length; ++i) {
-    for(int j = 0; j < width; ++j) {
-      if(piece[i][j] == 'B') {//or whatever we are looking at in the vector<vector <char>>
-        XYCor xy = {i, j};
-        v.emplace_back(xy);
-      }
+using namespace std;
+
+vector<Coord> Block::getPos() { return pos; }
+
+int Block::getLength() { return length; }
+
+int Block::getWidth() { return width; }
+
+void Block::moveLeft()  {
+  vector<Coord> temp = getPos();
+
+  bool atLeftEdge = false;
+
+  // Moving left by decrementing x if not already at leftmost edge
+  for (Coord n : temp) {
+    if (n.x == 0) atLeftEdge = true;
+  }
+  if (!atLeftEdge) {
+    for (Coord &n : temp) {
+      (n.x)--;
     }
   }
+
+  pos = temp;
 }
 
+void Block::moveRight()  {
+  vector<Coord> temp = getPos();
 
-void Blocks::moveLeft()  {
-  vector<XYCor> temp = getXYCor();
-  //moving left decrementing x
-  for(auto &n : temp) {
-    (n.x)--;
+  bool atRightEdge = false;
+
+  // Moving right by incrementing x if not already at rightmost edge
+  for (Coord n : temp) {
+    if (n.x == 10) atRightEdge = true;
   }
-
-  int len = temp.size();
-  //we know where in the vector we have chars
-  piece.clear();
-  //we just need to place them at the right spot which will be
-  //subtracting 1 from the current x's location
-  int counter = 0;
-  for(int i = 0; i < length; i++) {
-    for(int j = 0; j < width; ++j) {
-      if(counter == len - 1) return;
-      if(i == temp[counter].x && j == temp[counter].y) {
-        piece[i][j] = 'B'; //or some char which represent that there is a block
-        counter++;
-      } else {
-        piece[i][j] = ' '; //or some char which represent that there is not a block
-      }
+  if (!atRightEdge) {
+    for (Coord &n : temp) {
+      (n.x)++;
     }
   }
+
+  pos = temp;
 }
 
+void Block::moveDown()  {
+  vector<Coord> temp = getPos();
 
+  bool atBottomEdge = false;
 
-void Blocks::moveRight()  {
-  vector<XYCor> temp = getXYCor();
-  //moving right incrementing x
-  for(auto &n : temp) {
-    (n.x)++;
+  // Moving down by incrementing y if not already at bottom
+  for (Coord n : temp) {
+    if (n.y == 14) atBottomEdge = true;
   }
-
-  int len = temp.size();
-  //we know where in the vector we have chars
-  piece.clear();
-  //we just need to place them at the right spot which will be
-  //subtracting 1 from the current x's location
-  int counter = 0;
-  for(int i = 0; i < length; i++) {
-    for(int j = 0; j < width; ++j) {
-      if(counter == len - 1) return;
-      if(i == temp[counter].x && j == temp[counter].y) {
-        piece[i][j] = 'B'; //or some char which represent that there is a block
-        counter++;
-      } else {
-        piece[i][j] = ' '; //or some char which represent that there is not a block
-      }
+  if (!atBottomEdge) {
+    for (Coord &n : temp) {
+      (n.y)++;
     }
   }
-}
 
-
-void Blocks::moveDown() {
-  vector<XYCor> temp = getXYCor();
-  //moving down incrementing y
-  for(auto &n : temp) {
-    (n.y)++;
-  }
-
-  int len = temp.size();
-  //we know where in the vector we have chars
-  piece.clear();
-  //we just need to place them at the right spot which will be
-  //subtracting 1 from the current x's location
-  int counter = 0;
-  for(int i = 0; i < length; i++) {
-    for(int j = 0; j < width; ++j) {
-      if(counter == len - 1) return;
-      if(i == temp[counter].x && j == temp[counter].y) {
-        piece[i][j] = 'B'; //or some char which represent that there is a block
-        counter++;
-      } else {
-        piece[i][j] = ' '; //or some char which represent that there is not a block
-      }
-    }
-  }
+  pos = temp;
 }

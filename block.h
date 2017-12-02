@@ -1,30 +1,29 @@
 #ifndef BLOCK_H
 #define BLOCK_H
 
-#include <string>
-#include <iostream>
 #include <vector>
-using namespace std;
 
-struct XYCor{
-    int x;
-    int y;
+struct Coord {
+  int x;
+  int y;
 };
 
 class Block {
-   vector<XYCor>  pos;
-    int length;
-    int width;
-public:
+  std::vector<Coord> pos;
+  int length;
+  int width;
+
+  public:
+    std::vector<Coord> getPos();
+    int getLength();
+    int getWidth();
+
+    void moveLeft();
+    void moveRight();
+    void moveDown();
+
     virtual void clockwise() = 0;
     virtual void antiClockwise() = 0;
-    void moveleft();
-    void moveright();
-    void movedown();
-    vector<XYCor>  getpos();
-    int getlength();
-    int getwidth();
-
 };
 
 #endif
