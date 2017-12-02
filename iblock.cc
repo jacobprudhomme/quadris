@@ -26,8 +26,11 @@ void IBlock::clockwise() {
       n.y = switchCoord;
     }
 
-    setLength(getWidth());
-    setWidth(getLength());
+    int length = getLength();
+    int width = getWidth();
+
+    setLength(width);
+    setWidth(length);
     setPos(temp);
   }
 }

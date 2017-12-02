@@ -2,13 +2,14 @@
 #define BLOCK_H
 
 #include <vector>
+#include "subject.h"
 
 struct Coord {
   int x;
   int y;
 };
 
-class Block {
+class Block : public Subject {
   std::vector<Coord> pos;
   int length;
   int width;
