@@ -2,11 +2,20 @@
 
 using namespace std;
 
+Block::Block(vector<Coord> pos, int length, int width):
+  pos{pos}, length{length}, width{width} {}
+
 vector<Coord> Block::getPos() { return pos; }
 
 int Block::getLength() { return length; }
 
 int Block::getWidth() { return width; }
+
+void Block::setPos(vector<Coord> newPos) { pos = newPos; }
+
+void Block::setLength(int newLength) { length = newLength; }
+
+void Block::setWidth(int newWidth) { width = newWidth; }
 
 void Block::moveLeft()  {
   vector<Coord> temp = getPos();

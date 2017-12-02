@@ -1,14 +1,16 @@
-#ifndef IBLOCK
-#define IBLOCK
+#ifndef IBLOCK_H
+#define IBLOCK_H
 
-#include <vector>
 #include "block.h"
-#include <iostream>
-#include <string>
 
-class IBlock: public Block {
-public:
-   IBlock();
+class IBlock : public Block {
+  int level;
+
+  public:
+    IBlock();
+
+    void clockwise() override;
+    void antiClockwise() override;
 };
 
 #endif
