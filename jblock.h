@@ -8,13 +8,13 @@
 #include <sstream>
 
 class JBlock: public Block {
+    int level;
+
 public:
     JBlock();
 
-
-public:
-
-
+    void clockwise() override;
+    void antiClockwise() override;
 };
 
 #endif

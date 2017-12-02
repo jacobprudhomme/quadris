@@ -8,12 +8,13 @@
 #include <sstream>
 
 class LBlock: public Block {
+    int level;
+
 public:
     LBlock();
 
-public:
-
-
+    void clockwise() override;
+    void antiClockwise() override;
 };
 
 #endif

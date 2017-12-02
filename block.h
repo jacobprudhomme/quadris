@@ -3,6 +3,8 @@
 
 #include <vector>
 #include "subject.h"
+#include "textdisplay.h"
+#include "board.h"
 
 struct Coord {
   int x;
@@ -13,9 +15,13 @@ class Block : public Subject {
   std::vector<Coord> pos;
   int length;
   int width;
+   static int numblockid;
+   int id;
+   TextDisplay *td = nullptr;
+    Board *b = nullptr;
 
   public:
-    Block(std::vector<Coord> pos, int length, int width);
+    Block(std::vector<Coord> pos, int length, int width, TextDisplay td, Board b);
 
     std::vector<Coord> getPos();
     int getLength();
@@ -32,5 +38,7 @@ class Block : public Subject {
     virtual void clockwise() = 0;
     virtual void antiClockwise() = 0;
 };
+
+int Block::numblockid = 0;
 
 #endif
