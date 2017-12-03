@@ -1,7 +1,3 @@
-//
-// Created by vyasm on 2017-11-26.
-//
-
 #include <sstream>
 #include "oblock.h"
 #include "score.h"

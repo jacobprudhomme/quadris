@@ -1,6 +1,3 @@
-//
-// Created by vyasm on 2017-11-26.
-//
 #include <sstream>
 #include "sblock.h"
 #include "zblock.h"
