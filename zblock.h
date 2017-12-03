@@ -8,13 +8,13 @@
 #include <sstream>
 
 class ZBlock: public Block {
-public:
-    ZBlock();
-
+    int level;
 
 public:
+    ZBlock( Board *b);
 
-
+    void clockwise() override;
+    void antiClockwise() override;
 };
 
 #endif

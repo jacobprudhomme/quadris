@@ -2,20 +2,25 @@
 #define BLOCK_H
 
 #include <vector>
+//#include "board.h"
+#include "coord.h"
 #include "subject.h"
 
-struct Coord {
-  int x;
-  int y;
-};
+class Board;
+struct Info;
+class Cell;
+
 
 class Block : public Subject {
   std::vector<Coord> pos;
   int length;
   int width;
+  static int numblockid;
+  int id;
+  Board *b = nullptr;
 
   public:
-    Block(std::vector<Coord> pos, int length, int width);
+    Block(std::vector<Coord> pos, int length, int width, Board *b);
 
     std::vector<Coord> getPos();
     int getLength();
@@ -31,6 +36,10 @@ class Block : public Subject {
 
     virtual void clockwise() = 0;
     virtual void antiClockwise() = 0;
+
+    Info getInfo();
+    std::vector<std::vector<Cell>> getBoard();
 };
+
 
 #endif

@@ -1,54 +1,89 @@
 #include <iostream>
-#include <vector>
-#include <cstddef>
+#include "board.h"
 #include "cell.h"
+#include <cstddef>
+
 using namespace std;
 
 Board::~Board () {
   delete td;
 }
 
+Board::Board(int r, int c, int n): rows{r}, cols{c}, numBlock{n} {};
+
 void Board::setObserver(Observer* ob) {
     this->ob = ob;
 }
 
-void Board::init(int rows, int columns) {
-  theBoard.clear();
-  td = nullptr;
-  this->rows = rows;
-  this->cols = columns;
-  this->numBlock = 0;
+void Board::init() {
   //Initilize the board with default cells
   //Rows: 18 (3 reserved for rotation)
   //columns: 11
   for(int i = 0; i < rows; ++i) {
-    vector <Cell> c;
-    for(int j = 0; j < columns; j++) {
-      Cell temp{i, j, false, "N", 0, -1};
+    vector<Cell> c;
+    for(int j = 0; j < cols; j++) {
+      Cell temp{i, j, false, 0, -1};
       c.emplace_back(temp);
     }
     theBoard.emplace_back(c);
   }
 
   //Text display to print that out
-  //td = &display{rows, columns};
+  td = new TextDisplay{};
+  attach(td);
 }
 
 //Given vector of the blocks position's
 //there should be another thing for which type of block it is
 void Board::notify(Subject &whoFrom) {
   //if already full then remove those rows
-  Board::whichRowFullDelete();
-
-  int x = this->numBlock++;
-  int size = whoFrom.size();
+  Board::whichRowFullDelete(); //calculates the full score, if we wont to
+  //int x = this->numBlock++;
+  //already on the table then we need to find and mutate the table
   int counter = 0;
+  int x = whoFrom.getInfo().id;
+  int lev = whoFrom.getInfo().level;
+  int size = 4; //four vectors always
+  bool runThat = true;
+
+  //make sure it if doesn't intersect and is not below the down line
+  for(int i = 3; i < rows; ++i) {
+    for(int j = 0; j < cols; ++j) {
+      if (counter == size - 1) runThat = false;
+      if (runThat) {
+        if (((theBoard[i][j].getR() == whoFrom.getInfo().pos[counter].x) &&
+            (theBoard[i][j].getC() == whoFrom.getInfo().pos[counter].y)) ||
+            (whoFrom.getInfo().pos[counter].x < 0) ||
+            (whoFrom.getInfo().pos[counter].x > 11) ||
+            (whoFrom.getInfo().pos[counter].y < 0) ||
+            (whoFrom.getInfo().pos[counter].y > 18))  {
+              return;
+            }
+            counter++;
+      }
+    }
+  }
+  runThat = true;
+  for(int i = 3; i < rows; ++i) {
+    for(int j = 0; j < cols; ++j) {
+      if (counter == size - 1) runThat = false;
+      if (runThat) {
+        if(x == theBoard[i][j].getBlockNum()) {
+          theBoard[i][j].toggle(); //switching the bool to false
+          theBoard[i][j].setBlockNum(0); //we set the bool to initial val
+          theBoard[i][j].setLevel(-1); //initial level i.e -1
+          counter++;
+        }
+      }
+    }
+  }
   for(int i = 3; i < rows; ++i) {
     for(int j = 0; j < cols; ++j) {
       if (counter == size - 1) return;
-      if((whoFrom[counter].getpos().x == i) && (whoFrom[counter].getpos().y == j)) {
+      if ((whoFrom.getInfo().pos[counter].x == i) && ((whoFrom.getInfo().pos[counter].y + 3) == j)) {
         theBoard[i][j].toggle();
         theBoard[i][j].setBlockNum(x);
+        theBoard[i][j].setLevel(lev);
         counter++;
       }
     }
@@ -76,13 +111,15 @@ void Board::whichRowFullDelete() {
         for(int j = 0; j < cols; ++j) {
           theBoard[x][j].setbool(theBoard[x-1][j].isBlock());
           theBoard[x][j].setBlockNum(theBoard[x-1][j].getBlockNum());
+          theBoard[x][j].setLevel(theBoard[x-1][j].getLevel());
           //we need to set string too but we dont have right now
         }
       }
       //setting the first row
-      for(int j = 0; j < cols; ++j){
+      for(int j = 0; j < cols; ++j) {
         theBoard[3][j].setbool(false);
         theBoard[3][j].setBlockNum(0);
+        theBoard[3][j].setLevel(-1);
         // level and string for which type of block it it
       }
     }
@@ -102,8 +139,15 @@ bool Board::isFull() {
   return false;
 }
 
+vector<vector<Cell>> Board::getBoard() {
+    return theBoard;
+}
 
 ostream& operator<<(ostream &out, const Board &b) {
     out << *(b.td);
     return out;
+}
+
+Info Board::getInfo() {
+    return Info{};
 }

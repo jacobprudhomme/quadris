@@ -7,13 +7,14 @@
 #include <string>
 #include <sstream>
 
-class LBlock: public Block {
-public:
-    LBlock();
+class LBlock : public Block {
+    int level;
 
 public:
+    LBlock( Board *b);
 
-
+    void clockwise() override;
+    void antiClockwise() override;
 };
 
 #endif

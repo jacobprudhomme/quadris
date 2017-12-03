@@ -4,10 +4,18 @@
 #include <string>
 #include <vector>
 
+
+#include "score.h"
+#include "upcoming.h"
+#include "board.h"
+#include "block.h"
+#include "iblock.h"
+#include "jblock.h"
+#include "lblock.h"
+#include "oblock.h"
+#include "zblock.h"
 #include "sblock.h"
 #include "tblock.h"
-#include "score.h"
-#include "upcoming.h"
 
 using namespace std;
 
@@ -15,41 +23,6 @@ using namespace std;
 Score *Score::singleton_instance = 0;
 Upcoming *Upcoming::singleton_instance = 0;
 
-/*
-#include "score.h"
-#include "upcoming.h"
-#include "textdisplay.h"
-
-using namespace std;
-
-// Necessary to initialize the Score singleton
-Score *Score::singleton_instance = 0;
-Upcoming *Upcoming::singleton_instance = 0;
-
-int main() {
-  TextDisplay *td = new TextDisplay{};
-
-  cout << *td;
-
-  Upcoming::instance()->setNextBlocks('I');
-
-  cout << *td;
-
-  Upcoming::instance()->setNextBlocks('J');
-  Upcoming::instance()->setNextBlocks('Z');
-
-  // Anywhere you want to update the score or level,
-  // include "score.h" and use these methods like so:
-  // (there are also getters)
-  Score::instance()->setScore(5);
-  Score::instance()->setHiScore(5);
-  Score::instance()->setLevel(1);
-
-  cout << *td;
-
-  return 0;
-}
-*/
 
 int main(int argc, char *argv[]) {
     int level = 0;
@@ -59,7 +32,7 @@ int main(int argc, char *argv[]) {
     bool fileused = false;
     string filename;
     bool usingrandom = true;
-
+/*
     for(int x = 1; x < argc; ++x){
         if (argv[x] == "-text"){
              text = true;
@@ -86,8 +59,8 @@ int main(int argc, char *argv[]) {
             ++x;
         }
     }
-
-
+*/
+    
     char mult;
     string left = "lef";//left(lef)
     string right = "ri";//right(ri)
@@ -106,6 +79,13 @@ int main(int argc, char *argv[]) {
     string file;
     string seqfile;
 
+    Board *obj = new Board{18, 11, 0};
+    obj->init();
+    JBlock i(obj);
+    cout << (*obj) << endl;
+    i.moveLeft();
+    cout << (*obj) << endl;    
+    /*
     while (cin >> s) {
         istringstream iss{s};
         iss >> mult;
@@ -235,4 +215,5 @@ int main(int argc, char *argv[]) {
         }
 
     }
+     */
 }

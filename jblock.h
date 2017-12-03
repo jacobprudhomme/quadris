@@ -1,20 +1,16 @@
-#ifndef JBLOCK
-#define JBLOCK
+#ifndef JBLOCK_H
+#define JBLOCK_H
 
-#include <vector>
 #include "block.h"
-#include <iostream>
-#include <string>
-#include <sstream>
 
-class JBlock: public Block {
-public:
-    JBlock();
+class JBlock : public Block {
+  int level;
 
+  public:
+    JBlock( Board *b);
 
-public:
-
-
+    void clockwise() override;
+    void antiClockwise() override;
 };
 
 #endif

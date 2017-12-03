@@ -1,10 +1,18 @@
+#include <iostream>
 #include "block.h"
+#include <vector>
+#include "subject.h"
+#include "textdisplay.h"
+#include "board.h"
+#include "info.h"
 
 using namespace std;
 
-Block::Block(vector<Coord> pos, int length, int width):
-  pos{pos}, length{length}, width{width} {
-    // TODO: Attach TextDisplay and Grid as observers
+int Block::numblockid = 0;
+
+Block::Block(vector<Coord> pos, int length, int width, Board *b):
+  pos{pos}, length{length}, width{width}, id{numblockid++} {
+    attach(b);
   }
 
 vector<Coord> Block::getPos() { return pos; }
@@ -77,4 +85,19 @@ void Block::moveDown()  {
   pos = temp;
 
   notifyObservers();
+}
+
+Info Block::getInfo() {
+  Info info{};
+
+  info.pos = pos;
+  info.id = id;
+  info.length = length;
+  info.width = width;
+
+  return info;
+}
+
+vector<vector<Cell>> Block::getBoard() {
+    return vector<vector<Cell>> {};
 }

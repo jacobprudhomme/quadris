@@ -6,13 +6,14 @@
 #include <iostream>
 #include <string>
 
-class OBlock: public Block {
+class OBlock : public Block {
+    int level;
+
 public:
-    OBlock();
+    OBlock( Board *b);
 
-
-
-
+    void clockwise() override;
+    void antiClockwise() override;
 };
 
 #endif

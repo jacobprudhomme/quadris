@@ -1,7 +1,8 @@
 #include "textdisplay.h"
 #include "score.h"
 #include "upcoming.h"
-
+#include "block.h"
+#include "cell.h"
 using namespace std;
 
 TextDisplay::TextDisplay():
@@ -16,6 +17,19 @@ TextDisplay::TextDisplay():
   }
 
 void TextDisplay::notify(Subject &whoFrom) {
+  vector<vector<Cell>> theBoard = whoFrom.getBoard();
+
+  for (auto &row : gridDisp) {
+    for (char &cell : row) {
+      cell = ' ';
+    }
+  }
+
+  for (auto row : theBoard) {
+    for (Cell cell : row) {
+      if (cell.isBlock()) gridDisp.at(cell.getR()).at(cell.getC()) = 'B';
+    }
+  }
 }
 
 ostream &operator<<(ostream &out, const TextDisplay &td) {
