@@ -4,8 +4,10 @@
 #include "info.h"
 #include "observer.h"
 
+
 class Observer;
 class Cell;
+struct Info;
 
 class Subject {
   std::vector<Observer *> obs;

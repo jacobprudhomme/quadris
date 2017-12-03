@@ -4,7 +4,7 @@
 #include "block.h"
 
 class SBlock : public Block {
-    int level;
+  int level;
 
   public:
     SBlock(Board *b);

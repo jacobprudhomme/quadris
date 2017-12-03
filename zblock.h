@@ -4,7 +4,7 @@
 #include "block.h"
 
 class ZBlock : public Block {
-    int level;
+  int level;
 
   public:
     ZBlock(Board *b);

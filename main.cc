@@ -81,10 +81,26 @@ int main(int argc, char *argv[]) {
 
     Board *obj = new Board{18, 11, 0};
     obj->init();
-    JBlock i(obj);
+    IBlock i(obj);
     cout << (*obj) << endl;
-    i.moveLeft();
-    cout << (*obj) << endl;    
+    for(int x = 0; x < 16; ++x) {
+        i.moveDown();
+    }
+    for(int x = 0; x < 11; x++) {
+        i.moveRight();
+    }
+    IBlock r(obj);
+    for(int x = 0; x < 16; ++x) {
+        r.moveDown();
+    }
+    for(int x = 0; x < 3; x++) {
+        r.moveRight();
+    }
+    JBlock j(obj);
+    for(int x = 0; x < 16; ++x) {
+        j.moveDown();
+    }
+    cout << (*obj) << endl;  
     /*
     while (cin >> s) {
         istringstream iss{s};

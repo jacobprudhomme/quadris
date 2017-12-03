@@ -3,11 +3,12 @@
 #include "upcoming.h"
 #include "block.h"
 #include "cell.h"
+
 using namespace std;
 
 TextDisplay::TextDisplay():
   gridDisp{vector<vector<char>> {}} {
-    for (int row = 0; row < 15; row++) {
+    for (int row = 0; row < 18; row++) {
       gridDisp.emplace_back(vector<char> {});
 
       for (int cell = 0; cell < 11; cell++) {
@@ -25,8 +26,8 @@ void TextDisplay::notify(Subject &whoFrom) {
     }
   }
 
-  for (auto row : theBoard) {
-    for (Cell cell : row) {
+  for (auto &row : theBoard) {
+    for (auto &cell : row) {
       if (cell.isBlock()) gridDisp.at(cell.getR()).at(cell.getC()) = 'B';
     }
   }
