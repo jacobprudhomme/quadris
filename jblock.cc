@@ -25,7 +25,7 @@ void JBlock::clockwise() {
     for (Coord &n : temp) {
       int switchCoord = n.x;
       n.x = -n.y + (getWidth() - 1);
-      n.y = switchCoord;
+      n.y = switchCoord - 1;
     }
 
     int length = getLength();

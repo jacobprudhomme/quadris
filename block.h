@@ -2,14 +2,12 @@
 #define BLOCK_H
 
 #include <vector>
-//#include "board.h"
 #include "coord.h"
 #include "subject.h"
 
 class Board;
 struct Info;
 class Cell;
-
 
 class Block : public Subject {
   std::vector<Coord> pos;

@@ -11,7 +11,7 @@ class TBlock: public Block {
     int level;
 
 public:
-    TBlock( Board *b);
+    TBlock(Board *b);
 
     void clockwise() override;
     void antiClockwise() override;

@@ -1,11 +1,10 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-#include <iostream>
-#include <vector>
-#include <cstddef>
-#include "textdisplay.h"
 #include "cell.h"
+#include "textdisplay.h"
+#include "observer.h"
+#include "info.h"
 
 class Cell;
 
@@ -16,13 +15,15 @@ class Board : public Observer, public Subject {
   int rows;
   int cols;
   int numBlock;
-
+  void calculatingScore(std::vector<int> v);
+  void deleteRows(std::vector<int> v);
+  
  public:
   ~Board();
   Board(int r, int c, int n);
   void setObserver(Observer *ob);
   void init(); // Sets up an width x height grid.  Clears old grid, if necessary.
-  void whichRowFullDelete(); //checks if any row is full and delet all the rows and move everything
+  std::vector<int> whichRowFullDelete(); //checks if any row is full and delet all the rows and move everything
                              //downwards
   bool isFull();
   void notify(Subject &whoFrom); //the block is sent to make changes to the entire grid
