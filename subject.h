@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "observer.h"
+#include "block.h"
 
 class Observer;
 
@@ -12,6 +13,8 @@ class Subject {
   public:
     void attach(Observer *ob);
     void notifyObservers();
+
+    virtual std::vector<Coord> getPos() = 0;
 };
 
 #endif

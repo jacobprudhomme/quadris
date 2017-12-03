@@ -1,6 +1,7 @@
 #include "textdisplay.h"
 #include "score.h"
 #include "upcoming.h"
+#include "block.h"
 
 using namespace std;
 
@@ -16,6 +17,11 @@ TextDisplay::TextDisplay():
   }
 
 void TextDisplay::notify(Subject &whoFrom) {
+  vector<Coord> block = whoFrom.getPos();
+
+  for (Coord pos : block) {
+    gridDisp.at(pos.y).at(pos.x) = 'B';
+  }
 }
 
 ostream &operator<<(ostream &out, const TextDisplay &td) {
