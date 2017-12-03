@@ -22,7 +22,7 @@ void JBlock::clockwise() {
   if (isThereSpace) {
     for (Coord &n : temp) {
       int switchCoord = n.x;
-      n.x = n.y;
+      n.x = -n.y + (getWidth() - 1);
       n.y = switchCoord;
     }
 
@@ -36,5 +36,7 @@ void JBlock::clockwise() {
 }
 
 void JBlock::antiClockwise() {
+  clockwise();
+  clockwise();
   clockwise();
 }
