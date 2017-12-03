@@ -1,10 +1,12 @@
 #ifndef CELL_H
 #define CELL_H
+
 #include <iostream>
 #include <string>
 #include <vector>
 #include <cstddef>
-#include "Block.h"
+
+#include "block.h"
 
 
 class Cell {
@@ -21,7 +23,6 @@ public:
 
   bool isBlock(); // returns true if the cell contains block or not
   void toggle(); // changes the containsblock clock switch
-  void notify(Subject &whoFrom) override;// My neighbours will call this
                                                 // when they've changed state
   int getR();
   int getC();
