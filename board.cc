@@ -1,7 +1,3 @@
-#include <iostream>
-#include <vector>
-#include <cstddef>
-#include "cell.h"
 #include "board.h"
 
 using namespace std;
