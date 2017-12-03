@@ -1,16 +1,13 @@
-#ifndef OBLOCK
-#define OBLOCK
+#ifndef OBLOCK_H
+#define OBLOCK_H
 
-#include <vector>
 #include "block.h"
-#include <iostream>
-#include <string>
 
 class OBlock : public Block {
-    int level;
+  int level;
 
-public:
-    OBlock( Board *b);
+  public:
+    OBlock(Board *b);
 
     void clockwise() override;
     void antiClockwise() override;
