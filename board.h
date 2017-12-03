@@ -1,11 +1,9 @@
 #ifndef BOARD_H
 #define BOARD_H
-
 #include <iostream>
 #include <vector>
 #include <cstddef>
-
-#include "textdisplay.h"
+#include "display.h"
 #include "cell.h"
 
 
