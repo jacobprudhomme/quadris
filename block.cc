@@ -87,6 +87,7 @@ Info Block::getInfo() {
   info.id = id;
   info.length = length;
   info.width = width;
+  info.level = Score::instance()->getLevel();
 
   return info;
 }

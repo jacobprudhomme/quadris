@@ -2,8 +2,8 @@
 #define SUBJECT_H
 
 #include <vector>
+
 #include "observer.h"
-#include "block.h"
 #include "info.h"
 
 class Observer;

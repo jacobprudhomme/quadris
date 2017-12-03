@@ -5,12 +5,8 @@
 
 #include "subject.h"
 #include "textdisplay.h"
+#include "coord.h"
 #include "board.h"
-
-struct Coord {
-  int x;
-  int y;
-};
 
 class Block : public Subject {
   std::vector<Coord> pos;

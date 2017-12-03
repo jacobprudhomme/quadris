@@ -8,6 +8,7 @@
 #include "textdisplay.h"
 #include "cell.h"
 
+class Cell;
 
 class Board {
   std::vector<std::vector<Cell>> theBoard;  // The actual grid.

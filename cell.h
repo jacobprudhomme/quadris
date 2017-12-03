@@ -6,9 +6,6 @@
 #include <vector>
 #include <cstddef>
 
-#include "block.h"
-
-
 class Cell {
   int r; //which row is this at
   int c; //which column is it at
@@ -33,4 +30,5 @@ public:
   void setbool(bool x);
   void setLevel(int y);
 };
+
 #endif
