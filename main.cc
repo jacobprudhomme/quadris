@@ -4,7 +4,6 @@
 #include <string>
 #include <vector>
 
-
 #include "score.h"
 #include "upcoming.h"
 #include "board.h"
@@ -60,7 +59,7 @@ int main(int argc, char *argv[]) {
         }
     }
 */
-    
+
     char mult;
     string left = "lef";//left(lef)
     string right = "ri";//right(ri)
