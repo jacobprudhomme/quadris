@@ -38,6 +38,8 @@ class Block : public Subject {
 
     virtual void clockwise() = 0;
     virtual void antiClockwise() = 0;
+
+    Info getInfo() override;
 };
 
 int Block::numblockid = 0;

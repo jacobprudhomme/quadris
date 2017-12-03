@@ -79,3 +79,14 @@ void Block::moveDown()  {
 
   notifyObservers();
 }
+
+Info Block::getInfo() {
+  Info info{};
+
+  info.pos = pos;
+  info.id = id;
+  info.length = length;
+  info.width = width;
+
+  return info;
+}
