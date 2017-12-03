@@ -2,7 +2,8 @@
 #define INFO_H
 
 #include <vector>
-#include "coord.h"
+
+struct Coord;
 
 struct Info {
   std::vector<Coord> pos;

@@ -17,7 +17,7 @@ TextDisplay::TextDisplay():
   }
 
 void TextDisplay::notify(Subject &whoFrom) {
-  vector<Coord> block = whoFrom.getPos();
+  vector<Coord> block = whoFrom.getInfo().pos;
 
   for (Coord pos : block) {
     gridDisp.at(pos.y).at(pos.x) = 'B';

@@ -2,11 +2,12 @@
 #define BLOCK_H
 
 #include <vector>
-
-#include "subject.h"
-#include "textdisplay.h"
-#include "coord.h"
 #include "board.h"
+#include "coord.h"
+
+class TextDisplay;
+class Board;
+struct Info;
 
 class Block : public Subject {
   std::vector<Coord> pos;
@@ -35,9 +36,8 @@ class Block : public Subject {
     virtual void clockwise() = 0;
     virtual void antiClockwise() = 0;
 
-    Info getInfo() override;
+    Info getInfo();
 };
 
-int Block::numblockid = 0;
 
 #endif

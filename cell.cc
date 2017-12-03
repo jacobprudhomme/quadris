@@ -5,7 +5,7 @@ using namespace std;
 
 
 Cell::Cell(int r, int c, bool b, int n, int l):
-          r{r}, c{c}, containsBlock{b}, int n, level{l} {};
+          r{r}, c{c}, containsBlock{b}, numBlock{n}, level{l} {};
 
 void Cell::toggle() {
   containsBlock = !containsBlock;

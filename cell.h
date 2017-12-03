@@ -1,10 +1,11 @@
 #ifndef CELL_H
 #define CELL_H
-
 #include <iostream>
 #include <string>
 #include <vector>
 #include <cstddef>
+#include "block.h"
+
 
 class Cell {
   int r; //which row is this at
@@ -20,7 +21,6 @@ public:
 
   bool isBlock(); // returns true if the cell contains block or not
   void toggle(); // changes the containsblock clock switch
-                                                // when they've changed state
   int getR();
   int getC();
   //std::string getStr();
@@ -30,5 +30,4 @@ public:
   void setbool(bool x);
   void setLevel(int y);
 };
-
 #endif

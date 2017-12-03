@@ -1,6 +1,14 @@
+#include <iostream>
 #include "block.h"
+#include <vector>
+#include "subject.h"
+#include "textdisplay.h"
+#include "board.h"
+#include "info.h"
 
 using namespace std;
+
+int Block::numblockid = 0;
 
 Block::Block(vector<Coord> pos, int length, int width, TextDisplay *td, Board *b):
   pos{pos}, length{length}, width{width}, id{numblockid++} {
@@ -87,7 +95,6 @@ Info Block::getInfo() {
   info.id = id;
   info.length = length;
   info.width = width;
-  info.level = Score::instance()->getLevel();
 
   return info;
 }

@@ -1,4 +1,6 @@
+#include <iostream>
 #include "board.h"
+#include "cell.h"
 
 using namespace std;
 
@@ -40,8 +42,8 @@ void Board::notify(Subject &whoFrom) {
   //int x = this->numBlock++;
   //already on the table then we need to find and mutate the table
   int counter = 0;
-  int x = whoFrom.numblockid();
-  int lev = whoFrom.level();
+  int x = whoFrom.getInfo().id;
+  int lev = whoFrom.getInfo().level;
   int size = 4; //four vectors always
   bool runThat = true;
 
@@ -50,12 +52,12 @@ void Board::notify(Subject &whoFrom) {
     for(int j = 0; j < cols; ++j) {
       if (counter == size - 1) runThat = false;
       if (runThat) {
-        if (((theBoard[i][j].getR() == whoFrom.getpos()[counter].x) &&
-            (theBoard[i][j].getC() == whoFrom.getpos()[counter].y)) ||
-            (whoFrom.getpos()[counter].x < 0) ||
-            (whoFrom.getpos()[counter].x > 11) ||
-            (whoFrom.getpos()[counter].y < 0) ||
-            (whoFrom.getpos()[counter].y > 18))  {
+        if (((theBoard[i][j].getR() == whoFrom.getInfo().pos[counter].x) &&
+            (theBoard[i][j].getC() == whoFrom.getInfo().pos[counter].y)) ||
+            (whoFrom.getInfo().pos[counter].x < 0) ||
+            (whoFrom.getInfo().pos[counter].x > 11) ||
+            (whoFrom.getInfo().pos[counter].y < 0) ||
+            (whoFrom.getInfo().pos[counter].y > 18))  {
               return;
             }
             counter++;
@@ -79,7 +81,7 @@ void Board::notify(Subject &whoFrom) {
   for(int i = 3; i < rows; ++i) {
     for(int j = 0; j < cols; ++j) {
       if (counter == size - 1) return;
-      if ((whoFrom.getPos()[counter].x == i) && ((whoFrom.getpos()[counter].y + 3) == j)) {
+      if ((whoFrom.getInfo().pos[counter].x == i) && ((whoFrom.getInfo().pos[counter].y + 3) == j)) {
         theBoard[i][j].toggle();
         theBoard[i][j].setBlockNum(x);
         theBoard[i][j].setLevel(lev);
