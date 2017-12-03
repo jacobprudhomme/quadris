@@ -10,9 +10,8 @@ using namespace std;
 
 int Block::numblockid = 0;
 
-Block::Block(vector<Coord> pos, int length, int width, TextDisplay *td, Board *b):
+Block::Block(vector<Coord> pos, int length, int width, Board *b):
   pos{pos}, length{length}, width{width}, id{numblockid++} {
-    attach(td);
     attach(b);
   }
 
@@ -97,4 +96,8 @@ Info Block::getInfo() {
   info.width = width;
 
   return info;
+}
+
+vector<vector<Cell>> Block::getBoard() {
+    return vector<vector<Cell>> {};
 }

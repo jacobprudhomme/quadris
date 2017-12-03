@@ -7,7 +7,7 @@ class JBlock : public Block {
   int level;
 
   public:
-    JBlock(TextDisplay *td, Board *b);
+    JBlock( Board *b);
 
     void clockwise() override;
     void antiClockwise() override;

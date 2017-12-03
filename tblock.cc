@@ -1,14 +1,11 @@
-//
-// Created by vyasm on 2017-11-26.
-//
 #include <sstream>
 #include "tblock.h"
 #include "score.h"
 
 using namespace std;
 
-TBlock::TBlock(TextDisplay *td, Board *b):
-  Block{vector<Coord> {Coord{0,0}, Coord{0,1}, Coord{0,2}, Coord{0,3}}, 1, 4, td, b},
+TBlock::TBlock(Board *b):
+  Block{vector<Coord> {Coord{0,0}, Coord{0,1}, Coord{0,2}, Coord{0,3}}, 1, 4, b},
   level{Score::instance()->getLevel()} {}
 
 void TBlock::clockwise() {

@@ -2,12 +2,14 @@
 #define BLOCK_H
 
 #include <vector>
-#include "board.h"
+//#include "board.h"
 #include "coord.h"
+#include "subject.h"
 
-class TextDisplay;
 class Board;
 struct Info;
+class Cell;
+
 
 class Block : public Subject {
   std::vector<Coord> pos;
@@ -15,11 +17,10 @@ class Block : public Subject {
   int width;
   static int numblockid;
   int id;
-  TextDisplay *td = nullptr;
   Board *b = nullptr;
 
   public:
-    Block(std::vector<Coord> pos, int length, int width, TextDisplay *td, Board *b);
+    Block(std::vector<Coord> pos, int length, int width, Board *b);
 
     std::vector<Coord> getPos();
     int getLength();
@@ -37,6 +38,7 @@ class Block : public Subject {
     virtual void antiClockwise() = 0;
 
     Info getInfo();
+    std::vector<std::vector<Cell>> getBoard();
 };
 
 

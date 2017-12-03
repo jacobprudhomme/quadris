@@ -1,6 +1,3 @@
-//
-// Created by vyasm on 2017-11-26.
-//
 #include <sstream>
 #include "sblock.h"
 #include "zblock.h"
@@ -8,8 +5,8 @@
 
 using namespace std;
 
-ZBlock::ZBlock(TextDisplay *td, Board *b):
-  Block{vector<Coord> {Coord{0,0}, Coord{0,1}, Coord{0,2}, Coord{0,3}}, 1, 4, td, b},
+ZBlock::ZBlock(Board *b):
+  Block{vector<Coord> {Coord{0,0}, Coord{0,1}, Coord{0,2}, Coord{0,3}}, 1, 4, b},
   level{Score::instance()->getLevel()} {}
 
 void ZBlock::clockwise() {

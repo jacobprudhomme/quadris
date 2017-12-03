@@ -1,6 +1,7 @@
 #include <iostream>
 #include "board.h"
 #include "cell.h"
+#include <cstddef>
 
 using namespace std;
 
@@ -8,22 +9,19 @@ Board::~Board () {
   delete td;
 }
 
+Board::Board(int r, int c, int n): rows{r}, cols{c}, numBlock{n} {};
+
 void Board::setObserver(Observer* ob) {
     this->ob = ob;
 }
 
-void Board::init(int rows, int columns) {
-  theBoard.clear();
-  td = nullptr;
-  this->rows = rows;
-  this->cols = columns;
-  this->numBlock = 0;
+void Board::init() {
   //Initilize the board with default cells
   //Rows: 18 (3 reserved for rotation)
   //columns: 11
   for(int i = 0; i < rows; ++i) {
-    vector <Cell> c;
-    for(int j = 0; j < columns; j++) {
+    vector<Cell> c;
+    for(int j = 0; j < cols; j++) {
       Cell temp{i, j, false, 0, -1};
       c.emplace_back(temp);
     }
@@ -31,7 +29,8 @@ void Board::init(int rows, int columns) {
   }
 
   //Text display to print that out
-  //td = &display{rows, columns};
+  td = new TextDisplay{};
+  attach(td);
 }
 
 //Given vector of the blocks position's
@@ -140,8 +139,15 @@ bool Board::isFull() {
   return false;
 }
 
+vector<vector<Cell>> Board::getBoard() {
+    return theBoard;
+}
 
 ostream& operator<<(ostream &out, const Board &b) {
     out << *(b.td);
     return out;
+}
+
+Info Board::getInfo() {
+    return Info{};
 }

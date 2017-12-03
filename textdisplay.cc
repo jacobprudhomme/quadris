@@ -2,7 +2,7 @@
 #include "score.h"
 #include "upcoming.h"
 #include "block.h"
-
+#include "cell.h"
 using namespace std;
 
 TextDisplay::TextDisplay():
@@ -17,10 +17,18 @@ TextDisplay::TextDisplay():
   }
 
 void TextDisplay::notify(Subject &whoFrom) {
-  vector<Coord> block = whoFrom.getInfo().pos;
+  vector<vector<Cell>> theBoard = whoFrom.getBoard();
 
-  for (Coord pos : block) {
-    gridDisp.at(pos.y).at(pos.x) = 'B';
+  for (auto &row : gridDisp) {
+    for (char &cell : row) {
+      cell = ' ';
+    }
+  }
+
+  for (auto row : theBoard) {
+    for (Cell cell : row) {
+      if (cell.isBlock()) gridDisp.at(cell.getR()).at(cell.getC()) = 'B';
+    }
   }
 }
 

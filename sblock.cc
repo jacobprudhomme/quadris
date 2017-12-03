@@ -4,8 +4,8 @@
 
 using namespace std;
 
-SBlock::SBlock(TextDisplay *td, Board *b):
-  Block{vector<Coord> {Coord{0,0}, Coord{0,1}, Coord{0,2}, Coord{0,3}}, 1, 4, td, b},
+SBlock::SBlock(Board *b):
+  Block{vector<Coord> {Coord{0,0}, Coord{0,1}, Coord{0,2}, Coord{0,3}}, 1, 4, b},
   level{Score::instance()->getLevel()} {}
 
 void SBlock::clockwise() {

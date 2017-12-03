@@ -10,7 +10,7 @@ class OBlock : public Block {
     int level;
 
 public:
-    OBlock(TextDisplay *td, Board *b);
+    OBlock( Board *b);
 
     void clockwise() override;
     void antiClockwise() override;
