@@ -1,12 +1,16 @@
-#ifndef ZBLOCK_H
-#define ZBLOCK_H
+#ifndef ZBLOCK
+#define ZBLOCK
 
+#include <vector>
 #include "block.h"
+#include <iostream>
+#include <string>
+#include <sstream>
 
-class ZBlock : public Block {
-  int level;
+class ZBlock: public Block {
+    int level;
 
-  public:
+public:
     ZBlock(Board *b);
 
     void clockwise() override;

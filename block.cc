@@ -15,6 +15,11 @@ Block::Block(vector<Coord> pos, int length, int width, Board *b):
     attach(b);
   }
 
+void Block::init() {
+	
+    notifyObservers();
+}
+  
 vector<Coord> Block::getPos() { return pos; }
 
 int Block::getLength() { return length; }
@@ -100,4 +105,8 @@ Info Block::getInfo() {
 
 vector<vector<Cell>> Block::getBoard() {
     return vector<vector<Cell>> {};
+}
+
+bool Block::getDown() {
+    return true;
 }

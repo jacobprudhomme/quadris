@@ -8,7 +8,7 @@ using namespace std;
 JBlock::JBlock(Board *b):
   Block{vector<Coord> {Coord{0,0}, Coord{0,1}, Coord{1,1}, Coord{2,1}}, 2, 3, b},
   level{Score::instance()->getLevel()} {
-    notifyObservers();
+                                      // notifyObservers();
   }
 
 void JBlock::clockwise() {
