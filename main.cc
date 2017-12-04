@@ -26,7 +26,7 @@ using namespace std;
 Score *Score::singleton_instance = 0;
 Upcoming *Upcoming::singleton_instance = 0;
 
-static void inputHelper(Board *obj, Block *b, string command, int level, int &i,
+static void inputHelper(Board *obj, Block *&b, string command, int level, int &i,
                         bool usingseed, int seed) {
   bool changelvl = false;
 
@@ -55,9 +55,12 @@ static void inputHelper(Board *obj, Block *b, string command, int level, int &i,
   } else if (ccw == command.substr(0,2)) {
     b->antiClockwise();
   } else if (drop == command.substr(0,2)) {
-    while (obj->getDown()) {
+    //while (obj->getDown()) {
+    for (int z = 0; z < 15; z++) {
       b->moveDown();
     }
+    obj->setDown();
+    obj->notifyObservers();
 
     if (changelvl) {
       changelvl = false;
@@ -192,8 +195,6 @@ int main(int argc, char *argv[]) {
   string s;
   int i = 0;
   while (i < int(Upcoming::instance()->getVecBlock().size())) {
-    cout << *obj;
-
     while(cin >> s) {
       istringstream ss{s};
       int mult;

@@ -109,7 +109,7 @@ void Board::deleteRows(vector<int> v) {
 void Board::notify(Subject &whoFrom) {
   //if already full then remove those rows
  //calculates the full score, if we wont to
-  
+
   int counter = 0;
   int x = whoFrom.getInfo().id;
   int lev = whoFrom.getInfo().level;
@@ -123,7 +123,7 @@ void Board::notify(Subject &whoFrom) {
       if (counter > size - 1) runThat = false;
       if (runThat) {
         if (((theBoard[i][j].getR() == whoFrom.getInfo().pos[counter].x) &&
-            (theBoard[i][j].getC() == whoFrom.getInfo().pos[counter].y) && 
+            (theBoard[i][j].getC() == whoFrom.getInfo().pos[counter].y) &&
 	    (theBoard[i][j].isBlock())) ||
             (whoFrom.getInfo().pos[counter].x < 0) ||
             (whoFrom.getInfo().pos[counter].x > 10) ||
@@ -216,6 +216,9 @@ Info Board::getInfo() {
     return Info{};
 }
 
+void Board::setDown() {
+  this->down = false;
+}
 
 bool Board::getDown() {
     return this->down;

@@ -18,7 +18,7 @@ class Board : public Observer, public Subject {
   void calculatingScore(std::vector<int> v);
   void deleteRows(std::vector<int> v);
   bool down;
-  
+
  public:
   ~Board();
   Board(int r, int c, int n);
@@ -31,6 +31,7 @@ class Board : public Observer, public Subject {
   std::vector<std::vector<Cell>> getBoard();
   bool getDown() override;
   Info getInfo();
+  void setDown();
   friend std::ostream &operator<<(std::ostream &out, const Board &b);
 };
 
