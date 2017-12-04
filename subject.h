@@ -18,6 +18,7 @@ class Subject {
 
     virtual Info getInfo() = 0;
     virtual std::vector<std::vector<Cell>> getBoard() = 0;
+    virtual bool getDown() = 0;
 };
 
 #endif

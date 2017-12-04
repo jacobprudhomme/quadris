@@ -6,10 +6,11 @@
 using namespace std;
 
 LBlock::LBlock(Board *b):
-  Block{vector<Coord> {Coord{0,0}, Coord{1,0}, Coord{2,0}, Coord{0,1}}, 2, 3, b},
+  Block{vector<Coord> {Coord{2,0}, Coord{1,1}, Coord{0,1}, Coord{2,1}}, 2, 3, b},
   level{Score::instance()->getLevel()} {
-    notifyObservers();
+    //notifyObservers();
   }
+  
 
 void LBlock::clockwise() {
   vector<Coord> temp = getPos();

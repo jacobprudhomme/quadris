@@ -19,7 +19,7 @@ class Block : public Subject {
 
   public:
     Block(std::vector<Coord> pos, int length, int width, Board *b);
-
+    void init();
     std::vector<Coord> getPos();
     int getLength();
     int getWidth();
@@ -37,6 +37,7 @@ class Block : public Subject {
 
     Info getInfo();
     std::vector<std::vector<Cell>> getBoard();
+    bool getDown();
 };
 
 

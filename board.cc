@@ -63,7 +63,7 @@ void Board::calculatingScore(vector<int> v) {
   int counter = 0;
   int score = 0;
   if(xys.size() > 0) {
-    for (int i = 0; i < xys.size() - 1 ; ++i) {
+    for (unsigned int i = 0; i < xys.size() - 1 ; ++i) {
       if(xys[i].id == xys[i+1].id){
         counter++;
       } else {
@@ -108,15 +108,14 @@ void Board::deleteRows(vector<int> v) {
 //there should be another thing for which type of block it is
 void Board::notify(Subject &whoFrom) {
   //if already full then remove those rows
-  vector<int> whichRowsFull = whichRowFullDelete();
-  calculatingScore(whichRowsFull);
-  deleteRows(whichRowsFull); //calculates the full score, if we wont to
+ //calculates the full score, if we wont to
   
   int counter = 0;
   int x = whoFrom.getInfo().id;
   int lev = whoFrom.getInfo().level;
   int size = 4;
   bool runThat = true;
+  down = true;
   //make sure it if doesn't intersect and is not below the down line
 
   for(int i = 3; i < rows; ++i) {
@@ -124,18 +123,20 @@ void Board::notify(Subject &whoFrom) {
       if (counter > size - 1) runThat = false;
       if (runThat) {
         if (((theBoard[i][j].getR() == whoFrom.getInfo().pos[counter].x) &&
-            (theBoard[i][j].getC() == whoFrom.getInfo().pos[counter].y)) ||
+            (theBoard[i][j].getC() == whoFrom.getInfo().pos[counter].y) && 
+	    (theBoard[i][j].isBlock())) ||
             (whoFrom.getInfo().pos[counter].x < 0) ||
-            (whoFrom.getInfo().pos[counter].x > 11) ||
+            (whoFrom.getInfo().pos[counter].x > 10) ||
             (whoFrom.getInfo().pos[counter].y < 0) ||
-            (whoFrom.getInfo().pos[counter].y > 18))  {
+            (whoFrom.getInfo().pos[counter].y > 17))  {
+              counter++;
+              down = false;
+              notifyObservers();
               return;
             }
-            counter++;
       }
     }
   }
-
   counter = 0;
   runThat = true;
   size = 4;
@@ -159,7 +160,10 @@ void Board::notify(Subject &whoFrom) {
       theBoard[n.y + 3][n.x].setBlockNum(x);
       theBoard[n.y + 3][n.x].setLevel(lev);
   }
-    notifyObservers();
+  vector<int> whichRowsFull = whichRowFullDelete();
+  calculatingScore(whichRowsFull);
+  deleteRows(whichRowsFull);
+  notifyObservers();
 }
 
 
@@ -204,10 +208,15 @@ vector<vector<Cell>> Board::getBoard() {
 }
 
 ostream& operator<<(ostream &out, const Board &b) {
-    out << *(b.td);
+    out << *b.td;
     return out;
 }
 
 Info Board::getInfo() {
     return Info{};
+}
+
+
+bool Board::getDown() {
+    return this->down;
 }

@@ -17,6 +17,7 @@ class Board : public Observer, public Subject {
   int numBlock;
   void calculatingScore(std::vector<int> v);
   void deleteRows(std::vector<int> v);
+  bool down;
   
  public:
   ~Board();
@@ -28,7 +29,7 @@ class Board : public Observer, public Subject {
   bool isFull();
   void notify(Subject &whoFrom); //the block is sent to make changes to the entire grid
   std::vector<std::vector<Cell>> getBoard();
-  
+  bool getDown() override;
   Info getInfo();
   friend std::ostream &operator<<(std::ostream &out, const Board &b);
 };
