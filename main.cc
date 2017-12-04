@@ -138,110 +138,80 @@ static void inputHelper(Board *obj, Block *b, string command, int level, int &i,
 }
 
 int main(int argc, char *argv[]) {
-    // PROCESS COMMAND LINE FLAGS
-    //bool text = false;
-    bool usingseed = false;
-    int seed = -1;
-    //bool fileused = false;
-    string filename = "sequence.txt";
-    int level = 0;
+  // PROCESS COMMAND LINE FLAGS
+  //bool text = false;
+  bool usingseed = false;
+  int seed = -1;
+  //bool fileused = false;
+  string filename = "sequence.txt";
+  int level = 0;
 
-    for (int x = 1; x < argc; ++x) {
-        if (string(argv[x]), "-text") {
-            //text = true; //using textdisplay
-        } else if (string(argv[x]) == "-seed") {
-            istringstream ss{argv[x+1]};
-            if (!(ss >> seed)) {
-                cerr << "Please enter a correct seed" << endl;
-                return 1;
-            }
+  for (int x = 1; x < argc; ++x) {
+      if (string(argv[x]), "-text") {
+          //text = true; //using textdisplay
+      } else if (string(argv[x]) == "-seed") {
+          istringstream ss{argv[x+1]};
+          if (!(ss >> seed)) {
+              cerr << "Please enter a correct seed" << endl;
+              return 1;
+          }
 
-            usingseed = true;
-        } else if (string(argv[x]) == "-scriptfile" ) {
-            //fileused = true;
-            filename = string(argv[x+1]);
-        } else if (string(argv[x]) == "-startlevel") {
-            istringstream ss{argv[x+1]};
-            if (!(ss>>level)) {
-                cerr << "Please enter a correct level" << endl;
-                return 1;
-            } else if (level > 4 || level < 0) {
-                cerr << "Please enter a valid level" << endl;
-                return 1;
-            }
+          usingseed = true;
+      } else if (string(argv[x]) == "-scriptfile" ) {
+          //fileused = true;
+          filename = string(argv[x+1]);
+      } else if (string(argv[x]) == "-startlevel") {
+          istringstream ss{argv[x+1]};
+          if (!(ss>>level)) {
+              cerr << "Please enter a correct level" << endl;
+              return 1;
+          } else if (level > 4 || level < 0) {
+              cerr << "Please enter a valid level" << endl;
+              return 1;
+          }
+      }
+  }
+
+
+
+  // INITIALIZE BOARD AND OTHERS
+  Board *obj = new Board{18, 11, -1};
+  obj->init();
+  Blockselector *bsl = new Blockselector{filename, level};
+  bsl->runlevel(obj);
+  Upcoming::instance()->updatenextblock(level, seed, usingseed, obj);
+  Upcoming::instance()->setlevel(level);
+
+  bool firstblock = true;
+  Block *b = Upcoming::instance()->getVecBlock().at(0);
+  if (firstblock) {
+    firstblock = false;
+    b->init();
+  }
+  cout << *obj;
+
+
+
+  // START COMMAND LOOP
+  string s;
+  int i = 0;
+  while (i < int(Upcoming::instance()->getVecBlock().size())) {
+    cout << *obj;
+
+    while(cin >> s) {
+      istringstream ss{s};
+      int mult;
+      string command;
+      if (ss >> mult) {
+        ss >> command;
+        for (int j = 0; j < mult; j++) {
+          inputHelper(obj, b, command, level, i, usingseed, seed);
         }
+      } else {
+        inputHelper(obj, b, s, level, i, usingseed, seed);
+      }
+
+      cout << *obj;
     }
-
-
-
-    // INITIALIZE BOARD AND OTHERS
-    Board *obj = new Board{18, 11, -1};
-    obj->init();
-    Blockselector *bsl = new Blockselector{filename, level};
-    bsl->runlevel(obj);
-    Upcoming::instance()->updatenextblock(level, seed, usingseed, obj);
-   // Upcoming::instance()->updatenextblock(level,seed,usingseed,obj);
-  //  cout<<Upcoming::instance()->getVecBlock().size();
-   
-    // PRINT OUT INITIAL EMPTY BOARD
-   // vector<Block *> v{Upcoming::instance()->getVecBlock()};
-  //  cout << *obj;
-//    cout<<Upcoming::instance()->getVecBlock().size();
-    
-
-        Upcoming::instance()->setlevel(level);
-//	    cout<<Upcoming::instance()->getVecBlock().size();
-
-     //   v = Upcoming::instance()->getVecBlock();
-//	    cout<<Upcoming::instance()->getVecBlock().size();
-       
-   bool firstblock = true;
-             Block *b = Upcoming::instance()->getVecBlock().at(0);
-            if(firstblock){
-             firstblock = false;
-	     b->init();
-	    }
-           cout<<*obj;
-
-
-
-    // START COMMAND LOOP
-    string s;
- //  while (cin >> s) {
- //       istringstream ss{s};
-
-//        Upcoming::instance()->setlevel(level);
-  //      v = Upcoming::instance()->getVecBlock();
-
-        int i = 0;
-  //  Upcoming::instance()->getVecBlock().size();
-      cout<<"first loop";
-        while(i < int(Upcoming::instance()->getVecBlock().size())) {
-//	    cout<<Upcoming::instance()->getVecBlock().size();
-      cout<<"second loop";
-       //   Block *b = Upcoming::instance()->getVecBlock().at(i);
-       //     if(firstblock){
-       //      firstblock = false;
-	//     b->init();
-	//    }
-           cout<<*obj;
-        while(cin >> s){
-	istringstream ss{s};	
-            int mult;
-            string command;
-            if (ss >> mult) {
-                ss >> command;
-		cout<<"this is command before" << command;
-                for (int j = 0; j < mult; j++) {
-                    inputHelper(obj, b, command, level, i, usingseed, seed);
-                }
-            } else {
-                
-		cout<<"this is command befeor" << s;
-                inputHelper(obj, b, s, level, i, usingseed, seed);
-            }
-
-            cout << *obj;
-        }
-    }
+  }
 }
