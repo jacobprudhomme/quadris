@@ -27,114 +27,110 @@ Score *Score::singleton_instance = 0;
 Upcoming *Upcoming::singleton_instance = 0;
 
 static void inputHelper(Board *obj, Block *b, string command, int level, int &i,
-                         bool usingseed, int seed) {
-    bool changelvl = false;
+                        bool usingseed, int seed) {
+  bool changelvl = false;
 
-    const string left = "lef";//left(lef)
-    const string right = "ri";//right(ri)
-    const string down = "do";//down(do)
-    const string cw = "cl";//clockwise(cl)
-    const string ccw = "co";//counterclockwise(co)
-    const string drop = "dr";//drop(dr)
-    const string levelup = "levelu";//levelup(levelu)
-    const string leveldown = "leveld";//leveldown(leveld)
-    const string norandom = "n";//norandom(n)
-    const string random = "ra";//random(ra)
-    const string sequence = "s"; //sequence fiel(s)
-    const string restart = "re";//restart(re)
-    const string hint = "h";//hint(h)
- //   cout<<"the command is "<<command;
- //   cout<<"comapring this is"<<command.compare(0,3,right);
-    if (command.compare(0,3,left) == 1) {
-        b->moveLeft();
-    } else if (command.compare(0,3,right)== 1) {
+  const string left = "lef";//left(lef)
+  const string right = "ri";//right(ri)
+  const string down = "do";//down(do)
+  const string cw = "cl";//clockwise(cl)
+  const string ccw = "co";//counterclockwise(co)
+  const string drop = "dr";//drop(dr)
+  const string levelup = "levelu";//levelup(levelu)
+  const string leveldown = "leveld";//leveldown(leveld)
+  const string norandom = "n";//norandom(n)
+  const string random = "ra";//random(ra)
+  const string sequence = "s"; //sequence fiel(s)
+  const string restart = "re";//restart(re)
+  const string hint = "h";//hint(h)
 
-//	    cout<<"moving right";
-        b->moveRight();
-    } else if (command.compare(0,2,down)== 1) {
-        b->moveDown();
-    } else if (command.compare(0,2,cw) == 1) {
-        b->clockwise();
-    } else if (command.compare(0,2,ccw)== 1 ) {
-        b->antiClockwise();
-    } else if (command.compare(0,2,drop) == 1) {
-        while(obj->getDown()){
-            b->moveDown();
-        }
-
-        if (changelvl) {
-            changelvl = false;
-
-            Upcoming::instance()->setlevel(level);
-          //  v = Upcoming::instance()->getVecBlock();
-            Upcoming::instance()->updatenextblock(level, seed, usingseed, obj);
-        }
-
-        ++i;
-        b = Upcoming::instance()->getVecBlock().at(i);
-        b->init();
-    } else if (command.compare(0,6,levelup) == 1) {
-        level++;
-
-        if (level >= 4) {
-            level = 4;
-        }
-
-        changelvl = true;
-    } else if (command.compare(0,6,leveldown) == 1) {
-        level--;
-
-        if (level <= 0) {
-            level = 0;
-        }
-
-        changelvl = true;
-    } else if (command.compare(0,1,norandom) == 1) {
-        string file;
-        cin >> file;
-        //usingrandom = false;
-    } else if (command.compare(0,2,random) == 1) {
-        //usingrandom = true;
-    } else if (command.compare(0,1,sequence) == 1) {
-        string seqfile;
-        cin >> seqfile;
-        ifstream f{seqfile};
-
-        string commands;
-
-        while (f >> commands) {
-            istringstream ss{commands};
-            int mult;
-
-            if (ss >> mult) {
-                ss >> command;
-                for (int i = 0; i < mult; i++) {
-                    inputHelper(obj, b, command, level, i, usingseed, seed);
-                }
-            } else {
-                ss >> command;
-                inputHelper(obj, b, command, level, i, usingseed, seed);
-            }
-        }
-    } else if (command.compare(0,2,restart) == 1) {
-        //restart grid
-    } else if (command.compare(0,1,hint) == 1) {
-        //hint
-    } else if (command.compare(0,1,"I") == 1) {
-        //insert I block
-    } else if (command.compare(0,1,"J") == 1) {
-        //insert J block
-    } else if (command.compare(0,1,"O") == 1) {
-        //insert O block
-    } else if (command.compare(0,1,"S") == 1) {
-        //insert S block
-    } else if (command.compare(0,1,"Z") == 1) {
-        //insert Z block
-    } else if (command.compare(0,1,"T") == 1) {
-        //insert T block
-    } else if (command.compare(0,1,"L") == 1) {
-        //insert L block
+  if (left == command.substr(0,3)) {
+    b->moveLeft();
+  } else if (right == command.substr(0,2)) {
+    b->moveRight();
+  } else if (down == command.substr(0,2)) {
+    b->moveDown();
+  } else if (cw == command.substr(0,2)) {
+    b->clockwise();
+  } else if (ccw == command.substr(0,2)) {
+    b->antiClockwise();
+  } else if (drop == command.substr(0,2)) {
+    while (obj->getDown()) {
+      b->moveDown();
     }
+
+    if (changelvl) {
+      changelvl = false;
+
+      Upcoming::instance()->setlevel(level);
+      Upcoming::instance()->updatenextblock(level, seed, usingseed, obj);
+    }
+
+    ++i;
+    b = Upcoming::instance()->getVecBlock().at(i);
+    b->init();
+  } else if (levelup == command.substr(0,6)) {
+    level++;
+
+    if (level >= 4) {
+      level = 4;
+    }
+
+    changelvl = true;
+  } else if (leveldown == command.substr(0,6)) {
+    level--;
+
+    if (level <= 0) {
+      level = 0;
+    }
+
+    changelvl = true;
+  } else if (norandom == command.substr(0,1)) {
+    string file;
+    cin >> file;
+    //usingrandom = false;
+  } else if (random == command.substr(0,2)) {
+    //usingrandom = true;
+  } else if (sequence == command.substr(0,1)) {
+    string seqfile;
+    cin >> seqfile;
+    ifstream f{seqfile};
+
+    string commands;
+
+    while (f >> commands) {
+      istringstream ss{commands};
+      int mult;
+
+      if (ss >> mult) {
+        ss >> command;
+        for (int i = 0; i < mult; i++) {
+          inputHelper(obj, b, command, level, i, usingseed, seed);
+        }
+      } else {
+        ss >> command;
+        inputHelper(obj, b, command, level, i, usingseed, seed);
+      }
+    }
+  } else if (restart == command.substr(0,2)) {
+    //restart grid
+  } else if (hint == command.substr(0,1)) {
+    //hint
+  } else if (command == "I") {
+    //insert I block
+  } else if (command == "J") {
+    //insert J block
+  } else if (command == "L") {
+    //insert O block
+  } else if (command == "O") {
+    //insert S block
+  } else if (command == "S") {
+    //insert Z block
+  } else if (command == "T") {
+    //insert T block
+  } else if (command == "Z") {
+    //insert L block
+  }
 }
 
 int main(int argc, char *argv[]) {
