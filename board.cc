@@ -136,7 +136,7 @@ void Board::notify(Subject &whoFrom) {
               counter++;
               down = false;
               return;
-            }
+        }
       }
     }
   }
