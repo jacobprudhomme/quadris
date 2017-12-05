@@ -20,6 +20,9 @@ void Board::setObserver(Observer* ob) {
 void Board::init() {
     Score::instance()->setScore(0);
     Score::instance()->setLevel(0);
+    theBoard.clear();
+    detach();
+    delete td;
   //Initilize the board with default cells
   //Rows: 18 (3 reserved for rotation)
   //columns: 11
@@ -118,8 +121,8 @@ void Board::notify(Subject &whoFrom) {
   down = true;
   //make sure it if doesn't intersect and is not below the down line
 
-  for(int i = 3; i < rows; ++i) {
-    for(int j = 0; j < cols; ++j) {
+  for (int i = 3; i < rows; ++i) {
+    for (int j = 0; j < cols; ++j) {
       if (counter > size - 1) runThat = false;
       if (runThat) {
         if (((theBoard[i][j].getC() == whoFrom.getInfo().pos[counter].x) &&

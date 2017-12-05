@@ -14,6 +14,7 @@ class Subject {
 
   public:
     void attach(Observer *ob);
+    void detach();
     void notifyObservers();
 
     virtual Info getInfo() = 0;

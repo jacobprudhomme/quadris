@@ -116,7 +116,7 @@ static void inputHelper(Board *obj, Block *&b, string command, int level, int &i
       }
     }
   } else if (restart == command.substr(0,2)) {
-    //restart grid
+    obj->init();
   } else if (hint == command.substr(0,1)) {
     //hint
   } else if (command == "I") {
@@ -146,29 +146,29 @@ int main(int argc, char *argv[]) {
   int level = 0;
 
   for (int x = 1; x < argc; ++x) {
-      if (string(argv[x]), "-text") {
-          //text = true; //using textdisplay
-      } else if (string(argv[x]) == "-seed") {
-          istringstream ss{argv[x+1]};
-          if (!(ss >> seed)) {
-              cerr << "Please enter a correct seed" << endl;
-              return 1;
-          }
-
-          usingseed = true;
-      } else if (string(argv[x]) == "-scriptfile" ) {
-          //fileused = true;
-          filename = string(argv[x+1]);
-      } else if (string(argv[x]) == "-startlevel") {
-          istringstream ss{argv[x+1]};
-          if (!(ss>>level)) {
-              cerr << "Please enter a correct level" << endl;
-              return 1;
-          } else if (level > 4 || level < 0) {
-              cerr << "Please enter a valid level" << endl;
-              return 1;
-          }
+    if (string(argv[x]), "-text") {
+      //text = true; //using textdisplay
+    } else if (string(argv[x]) == "-seed") {
+      istringstream ss{argv[x+1]};
+      if (!(ss >> seed)) {
+        cerr << "Please enter a correct seed" << endl;
+        return 1;
       }
+
+      usingseed = true;
+    } else if (string(argv[x]) == "-scriptfile" ) {
+      //fileused = true;
+      filename = string(argv[x+1]);
+    } else if (string(argv[x]) == "-startlevel") {
+      istringstream ss{argv[x+1]};
+      if (!(ss>>level)) {
+        cerr << "Please enter a correct level" << endl;
+        return 1;
+      } else if (level > 4 || level < 0) {
+        cerr << "Please enter a valid level" << endl;
+        return 1;
+      }
+    }
   }
 
 
