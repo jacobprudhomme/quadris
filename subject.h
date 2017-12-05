@@ -1,9 +1,9 @@
 #ifndef SUBJECT_H
 #define SUBJECT_H
+
 #include <vector>
 #include "info.h"
 #include "observer.h"
-
 
 class Observer;
 class Cell;

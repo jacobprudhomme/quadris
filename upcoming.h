@@ -6,7 +6,7 @@
 
 class Upcoming {
   std::vector<char> upcoming;
-  std::vector <char> upcoming2;
+  std::vector<char> upcoming2;
   std::vector<Block *> b;
   static Upcoming *singleton_instance;
   int level;

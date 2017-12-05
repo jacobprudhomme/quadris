@@ -11,7 +11,6 @@ class Cell;
 class Board : public Observer, public Subject {
   std::vector<std::vector<Cell>> theBoard;  // The actual grid.
   TextDisplay *td = nullptr; // The text display.
-  Observer *ob = nullptr;  // Another observer (intent:  graphics)
   int rows;
   int cols;
   int numBlock;
