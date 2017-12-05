@@ -16,6 +16,7 @@
 #include "sblock.h"
 #include "tblock.h"
 #include "blockselector.h"
+#include "gameover.h"
 
 using namespace std;
 
@@ -190,19 +191,24 @@ int main(int argc, char *argv[]) {
   int i = 0;
   while (i < int(Upcoming::instance()->getVecBlock().size())) {
     while(cin >> s) {
-      istringstream ss{s};
-      int mult;
-      string command;
-      if (ss >> mult) {
-        ss >> command;
-        for (int j = 0; j < mult; j++) {
-          inputHelper(obj, b, command, level, i, usingseed, seed);
+      try {
+        istringstream ss{s};
+        int mult;
+        string command;
+        if (ss >> mult) {
+          ss >> command;
+          for (int j = 0; j < mult; j++) {
+            inputHelper(obj, b, command, level, i, usingseed, seed);
+          }
+        } else {
+          inputHelper(obj, b, s, level, i, usingseed, seed);
         }
-      } else {
-        inputHelper(obj, b, s, level, i, usingseed, seed);
-      }
 
-      cout << *obj << endl;
+        cout << *obj << endl;
+      } catch (GameOver) {
+        cout << "Game Over!" << endl;
+        break;
+      }
     }
   }
 }

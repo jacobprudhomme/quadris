@@ -4,6 +4,7 @@
 #include "board.h"
 #include "cell.h"
 #include "score.h"
+#include "gameover.h"
 
 using namespace std;
 
@@ -111,6 +112,10 @@ void Board::deleteRows(vector<int> v) {
 //Given vector of the blocks position's
 //there should be another thing for which type of block it is
 void Board::notify(Subject &whoFrom) {
+  if (isFull()) {
+    throw GameOver{};
+  }
+
   // Check if out of bounds or there is a block in the way; then exit function if so
   for (Coord &xy : whoFrom.getInfo().pos) {
     if ((xy.x < 0) || (xy.x > 10)) return;
@@ -171,13 +176,16 @@ vector<int> Board::whichRowFullDelete() {
 //Checking the to right cornor to see if there can be more blocks
 //or not
 bool Board::isFull() {
-  for(int i = 3; i < 6; ++i) {
-    for(int j = 0; j < 4; ++j) {
-      if(theBoard.at(i).at(j).isBlock()) {
-        return true;
-      }
+  for (int x = 0; x < 11; x++) {
+    bool isFull = true;
+
+    for (int y = 3; y < 18; y++) {
+      isFull = isFull && theBoard.at(y).at(x).isBlock();
     }
+
+    if (isFull) return true;
   }
+
   return false;
 }
 
