@@ -190,8 +190,8 @@ int main(int argc, char *argv[]) {
   string s;
   int i = 0;
   while (i < int(Upcoming::instance()->getVecBlock().size())) {
-    while(cin >> s) {
-      try {
+    try {
+      while(cin >> s) {
         istringstream ss{s};
         int mult;
         string command;
@@ -205,10 +205,13 @@ int main(int argc, char *argv[]) {
         }
 
         cout << *obj << endl;
-      } catch (GameOver) {
-        cout << "Game Over!" << endl;
-        break;
       }
+    } catch (GameOver) {
+      cout << "Game Over!" << endl;
+      cout << "Your high score was " << Score::instance()->getHiScore() << endl;
+      break;
     }
   }
+
+  return 0;
 }
