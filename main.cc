@@ -181,12 +181,9 @@ int main(int argc, char *argv[]) {
   Upcoming::instance()->updatenextblock(level, seed, usingseed, obj);
   Upcoming::instance()->setlevel(level);
 
-  bool firstblock = true;
   Block *b = Upcoming::instance()->getVecBlock().at(0);
-  if (firstblock) {
-    firstblock = false;
-    b->init();
-  }
+  b->init();
+
   cout << *obj << endl;
 
 

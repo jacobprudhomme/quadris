@@ -15,6 +15,8 @@ TextDisplay::TextDisplay():
         gridDisp.at(row).emplace_back(' ');
       }
     }
+
+    track = -1;
   }
 
   void TextDisplay::notify(Subject &whoFrom) {
@@ -50,15 +52,15 @@ ostream &operator<<(ostream &out, TextDisplay &td) {
   }
 
   out << "-----------" << endl;
-  if(td.getTrack() == -1){
+  if (td.getTrack() == -1){
     td.setTrack(0);
   }
   unsigned int count = td.getTrack() + 1;
-  if(count<= Upcoming::instance()->getNextBlocks().size()) {
+  if (count<= Upcoming::instance()->getNextBlocks().size()) {
     out << "Next:" << endl;
     char nextblock = Upcoming::instance()->getNextBlocks().at(td.getTrack()+1);
 
-    if (nextblock == 'I'){
+    if (nextblock == 'I') {
       out << "IIII" << endl;
     } else if (nextblock == 'J') {
     	out <<'J' << '\n' << "JJJ";
@@ -77,11 +79,11 @@ ostream &operator<<(ostream &out, TextDisplay &td) {
   return out;
 }
 
-int TextDisplay::getTrack(){
+int TextDisplay::getTrack() {
    return track;
 }
 
-bool TextDisplay::getcurrPos(){
+bool TextDisplay::getcurrPos() {
  return currPos;
 }
 
