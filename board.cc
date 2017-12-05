@@ -111,61 +111,36 @@ void Board::deleteRows(vector<int> v) {
 //Given vector of the blocks position's
 //there should be another thing for which type of block it is
 void Board::notify(Subject &whoFrom) {
-  //if already full then remove those rows
- //calculates the full score, if we wont to
-
-  int counter = 0;
-  int x = whoFrom.getInfo().id;
-  int lev = whoFrom.getInfo().level;
-  int size = 4;
-  bool runThat = true;
-  down = true;
-  //make sure it if doesn't intersect and is not below the down line
-
-  for (int i = 3; i < rows; ++i) {
-    for (int j = 0; j < cols; ++j) {
-      if (counter > size - 1) runThat = false;
-      if (runThat) {
-        if (((theBoard.at(i).at(j).getC() == whoFrom.getInfo().pos.at(counter).x) &&
-             (theBoard.at(i).at(j).getR() == whoFrom.getInfo().pos.at(counter).y + 3) &&
-	           (theBoard.at(i).at(j).isBlock())) ||
-            (whoFrom.getInfo().pos.at(counter).x < 0) ||
-            (whoFrom.getInfo().pos.at(counter).x > 10) ||
-            (whoFrom.getInfo().pos.at(counter).y + 3 < 0) ||
-            (whoFrom.getInfo().pos.at(counter).y + 3 > 17))  {
-              counter++;
-              down = false;
-              return;
-        }
-      }
-    }
+  // Check if out of bounds or there is a block in the way; then exit function if so
+  for (Coord &xy : whoFrom.getInfo().pos) {
+    if ((xy.x < 0) || (xy.x > 10)) return;
+    if ((xy.y < 0) || (xy.y > 17)) return;
+    if (theBoard.at(xy.y + 3).at(xy.x).isBlock()) return;
   }
-  counter = 0;
-  runThat = true;
-  size = 4;
-  for (int i = 3; i < rows; ++i) {
-    for (int j = 0; j < cols; ++j) {
-      if (counter > size - 1) runThat = false;
-      if (runThat) {
-        int y = theBoard.at(i).at(j).getBlockNum();
-        if (x == y) {
-          theBoard.at(i).at(j).setbool(false); //switching the bool to false
-          theBoard.at(i).at(j).setBlockNum(-1); //we set the bool to initial val
-          theBoard.at(i).at(j).setLevel(0); //initial level i.e -1
-          counter++;
-        }
+
+  // Clears all the old cells for the block
+  for (auto &row : theBoard) {
+    for (Cell &cell : row) {
+      if (cell.getBlockNum() == whoFrom.getInfo().id) {
+        cell.setbool(false);
+        cell.setBlockNum(-1);
+        cell.setLevel(0);
       }
     }
   }
 
-  for (auto &n : whoFrom.getInfo().pos) {
-    theBoard.at(n.y + 3).at(n.x).toggle();
-    theBoard.at(n.y + 3).at(n.x).setBlockNum(x);
-    theBoard.at(n.y + 3).at(n.x).setLevel(lev);
+  // Set new cells for the moved block
+  for (Coord &xy : whoFrom.getInfo().pos) {
+    theBoard.at(xy.y + 3).at(xy.x).setbool(true);
+    theBoard.at(xy.y + 3).at(xy.x).setBlockNum(whoFrom.getInfo().id);
+    theBoard.at(xy.y + 3).at(xy.x).setLevel(whoFrom.getInfo().level);
   }
-  vector<int> whichRowsFull = whichRowFullDelete();
-  calculatingScore(whichRowsFull);
-  deleteRows(whichRowsFull);
+
+  // Effect the changes on the board/textdisplay
+  vector<int> vec = whichRowFullDelete();
+  calculatingScore(vec);
+  deleteRows(vec);
+
   notifyObservers();
 }
 
