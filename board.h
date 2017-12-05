@@ -30,8 +30,8 @@ class Board : public Observer, public Subject {
   void notify(Subject &whoFrom); //the block is sent to make changes to the entire grid
   std::vector<std::vector<Cell>> getBoard();
   bool getDown() override;
-  Info getInfo();
   void setDown();
+  Info getInfo();
   friend std::ostream &operator<<(std::ostream &out, const Board &b);
 };
 

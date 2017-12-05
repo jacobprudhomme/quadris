@@ -16,10 +16,9 @@ Block::Block(vector<Coord> pos, int length, int width, Board *b):
   }
 
 void Block::init() {
-	
-    notifyObservers();
+  notifyObservers();
 }
-  
+
 vector<Coord> Block::getPos() { return pos; }
 
 int Block::getLength() { return length; }

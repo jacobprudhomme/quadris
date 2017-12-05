@@ -122,16 +122,15 @@ void Board::notify(Subject &whoFrom) {
     for(int j = 0; j < cols; ++j) {
       if (counter > size - 1) runThat = false;
       if (runThat) {
-        if (((theBoard[i][j].getR() == whoFrom.getInfo().pos[counter].x) &&
-            (theBoard[i][j].getC() == whoFrom.getInfo().pos[counter].y) &&
-	    (theBoard[i][j].isBlock())) ||
+        if (((theBoard[i][j].getC() == whoFrom.getInfo().pos[counter].x) &&
+             (theBoard[i][j].getR() == whoFrom.getInfo().pos[counter].y + 3) &&
+	           (theBoard[i][j].isBlock())) ||
             (whoFrom.getInfo().pos[counter].x < 0) ||
             (whoFrom.getInfo().pos[counter].x > 10) ||
-            (whoFrom.getInfo().pos[counter].y < 0) ||
-            (whoFrom.getInfo().pos[counter].y > 17))  {
+            (whoFrom.getInfo().pos[counter].y + 3 < 0) ||
+            (whoFrom.getInfo().pos[counter].y + 3 > 17))  {
               counter++;
               down = false;
-              notifyObservers();
               return;
             }
       }
@@ -140,12 +139,12 @@ void Board::notify(Subject &whoFrom) {
   counter = 0;
   runThat = true;
   size = 4;
-  for(int i = 3; i < rows; ++i) {
-    for(int j = 0; j < cols; ++j) {
+  for (int i = 3; i < rows; ++i) {
+    for (int j = 0; j < cols; ++j) {
       if (counter > size - 1) runThat = false;
       if (runThat) {
         int y = theBoard[i][j].getBlockNum();
-        if(x == y) {
+        if (x == y) {
           theBoard[i][j].setbool(false); //switching the bool to false
           theBoard[i][j].setBlockNum(-1); //we set the bool to initial val
           theBoard[i][j].setLevel(0); //initial level i.e -1
@@ -155,7 +154,7 @@ void Board::notify(Subject &whoFrom) {
     }
   }
 
-  for(auto &n : whoFrom.getInfo().pos) {
+  for (auto &n : whoFrom.getInfo().pos) {
       theBoard[n.y + 3][n.x].toggle();
       theBoard[n.y + 3][n.x].setBlockNum(x);
       theBoard[n.y + 3][n.x].setLevel(lev);
