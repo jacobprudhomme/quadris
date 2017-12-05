@@ -32,6 +32,7 @@ class Board : public Observer, public Subject {
   bool getDown() override;
   void setDown();
   Info getInfo();
+  
   friend std::ostream &operator<<(std::ostream &out, const Board &b);
 };
 

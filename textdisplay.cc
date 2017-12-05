@@ -19,7 +19,7 @@ TextDisplay::TextDisplay():
 
   void TextDisplay::notify(Subject &whoFrom) {
   vector<vector<Cell>> theBoard = whoFrom.getBoard();
-  
+
   if(whoFrom.getDown() == false){
    ++track;
   }
@@ -58,39 +58,38 @@ ostream &operator<<(ostream &out, TextDisplay &td) {
     out << "Next:" << endl;
     char nextblock = Upcoming::instance()->getNextBlocks().at(td.getTrack()+1);
 
-    if(nextblock == 'I'){
-     out<<'I'<<'I' << 'I'<<'I'<<endl; 
-    }
-    else if(nextblock == 'J') {
-    	out <<'J' << '\n' << 'J'<< 'J' << 'J' <<endl;
-    } else if(nextblock == 'L'){
-     out <<"  "<<'L'<<endl<<"LLL"; 
-    } else if(nextblock == 'O'){
-     out <<"OO"<<endl<<"OO"; 
+    if (nextblock == 'I'){
+      out << "IIII" << endl;
+    } else if (nextblock == 'J') {
+    	out <<'J' << '\n' << "JJJ";
+    } else if (nextblock == 'L') {
+      out << "  L" << endl << "LLL";
+    } else if (nextblock == 'O') {
+      out << "OO" << endl << "OO";
     } else if(nextblock == 'T') {
-    	out << "TTT" << '\n' << " " << 'T' << endl;
-    }else if(nextblock == 'S'){
-     out<<" SS"<< endl<< "SS "; 
-    }else if(nextblock == 'Z') {
-    	out  << "ZZ" << '\n' << " " << "ZZ" << endl;
+    	out << "TTT" << '\n' << " T";
+    } else if (nextblock == 'S') {
+      out << " SS" << endl << "SS ";
+    }else if (nextblock == 'Z') {
+    	out << "ZZ" << '\n' << " ZZ";
     }
   }
   return out;
 }
 
-
 int TextDisplay::getTrack(){
-   return track; 
+   return track;
 }
+
 bool TextDisplay::getcurrPos(){
- return currPos; 
+ return currPos;
 }
 
 void TextDisplay::setTrack(int n){
- track = n; 
+ track = n;
 }
 void TextDisplay::setcurrPos(bool x){
- currPos= x; 
+ currPos= x;
 }
 
 std::vector<std::vector<char> > TextDisplay::getgrid() {

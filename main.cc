@@ -187,7 +187,7 @@ int main(int argc, char *argv[]) {
     firstblock = false;
     b->init();
   }
-  cout << *obj;
+  cout << *obj << endl;
 
 
 
@@ -208,7 +208,7 @@ int main(int argc, char *argv[]) {
         inputHelper(obj, b, s, level, i, usingseed, seed);
       }
 
-      cout << *obj;
+      cout << *obj << endl;
     }
   }
 }
