@@ -119,7 +119,7 @@ void Board::notify(Subject &whoFrom) {
   // Check if out of bounds or there is a block in the way; then exit function if so
   for (Coord &xy : whoFrom.getInfo().pos) {
     if ((xy.x < 0) || (xy.x > 10)) return;
-    if ((xy.y < 0) || (xy.y > 17)) return;
+    if ((xy.y < 0) || (xy.y + 3 > 17)) return;
     if (theBoard.at(xy.y + 3).at(xy.x).isBlock()) return;
   }
 
