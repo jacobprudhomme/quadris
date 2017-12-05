@@ -33,7 +33,7 @@ void TextDisplay::notify(Subject &whoFrom) {
 
   for (auto &row : theBoard) {
     for (auto &cell : row) {
-      if (cell.isBlock()) gridDisp.at(cell.getR()).at(cell.getC()) = 'B';
+      if (cell.isBlock()) gridDisp.at(cell.getR()).at(cell.getC()) = '#';
     }
   }
 }
