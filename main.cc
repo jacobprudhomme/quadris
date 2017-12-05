@@ -4,8 +4,6 @@
 #include <string>
 #include <vector>
 
-
-
 #include "score.h"
 #include "upcoming.h"
 #include "board.h"
@@ -18,7 +16,6 @@
 #include "sblock.h"
 #include "tblock.h"
 #include "blockselector.h"
-
 
 using namespace std;
 

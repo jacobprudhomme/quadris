@@ -1,11 +1,7 @@
 #ifndef CELL_H
 #define CELL_H
-#include <iostream>
-#include <string>
-#include <vector>
-#include <cstddef>
-#include "block.h"
 
+#include "block.h"
 
 class Cell {
   int r; //which row is this at
@@ -16,18 +12,19 @@ class Cell {
   int level; //which level are we on, for calculating scores
   //I may be wrong, edit how you feel or I think we should have all this in state
 
-public:
-  Cell(int r, int c, bool b, int n, int l);
+  public:
+    Cell(int r, int c, bool b, int n, int l);
 
-  bool isBlock(); // returns true if the cell contains block or not
-  void toggle(); // changes the containsblock clock switch
-  int getR();
-  int getC();
-  //std::string getStr();
-  int getBlockNum();
-  int getLevel();
-  void setBlockNum(int n);
-  void setbool(bool x);
-  void setLevel(int y);
+    bool isBlock(); // returns true if the cell contains block or not
+    void toggle(); // changes the containsblock clock switch
+    int getR();
+    int getC();
+    //std::string getStr();
+    int getBlockNum();
+    int getLevel();
+    void setBlockNum(int n);
+    void setbool(bool x);
+    void setLevel(int y);
 };
+
 #endif

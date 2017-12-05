@@ -1,11 +1,11 @@
 #include <iostream>
-#include "cell.h"
 #include <string>
+#include "cell.h"
+
 using namespace std;
 
-
 Cell::Cell(int r, int c, bool b, int n, int l):
-          r{r}, c{c}, containsBlock{b}, numBlock{n}, level{l} {};
+          r{r}, c{c}, containsBlock{b}, numBlock{n}, level{l} {}
 
 void Cell::toggle() {
   containsBlock = !containsBlock;
@@ -23,11 +23,6 @@ int Cell::getC() {
   return this->c;
 }
 
-/*
-string Cell::getStr() {
-  return this->block;
-}*/
-
 int Cell::getBlockNum() {
   return this->numBlock;
 }
@@ -36,7 +31,6 @@ int Cell::getBlockNum() {
 void Cell::setBlockNum(int n) {
   this->numBlock = n;
 }
-
 
 int Cell::getLevel() {
   return this->level;

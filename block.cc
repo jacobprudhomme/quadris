@@ -1,6 +1,7 @@
 #include <iostream>
-#include "block.h"
 #include <vector>
+
+#include "block.h"
 #include "subject.h"
 #include "textdisplay.h"
 #include "board.h"
@@ -103,9 +104,9 @@ Info Block::getInfo() {
 }
 
 vector<vector<Cell>> Block::getBoard() {
-    return vector<vector<Cell>> {};
+  return vector<vector<Cell>> {};
 }
 
 bool Block::getDown() {
-    return true;
+  return true;
 }

@@ -1,15 +1,12 @@
-#ifndef SBLOCK
-#define SBLOCK
+#ifndef SBLOCK_H
+#define SBLOCK_H
 
-#include <vector>
 #include "block.h"
-#include <iostream>
-#include <string>
 
 class SBlock: public Block {
-    int level;
+  int level;
 
-public:
+  public:
     SBlock(Board *b);
 
     void clockwise() override;

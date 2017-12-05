@@ -1,16 +1,12 @@
-#ifndef TBLOCK
-#define TBLOCK
+#ifndef TBLOCK_H
+#define TBLOCK_H
 
-#include <vector>
 #include "block.h"
-#include <iostream>
-#include <string>
-#include <sstream>
 
 class TBlock: public Block {
-    int level;
+  int level;
 
-public:
+  public:
     TBlock(Board *b);
 
     void clockwise() override;

@@ -1,16 +1,12 @@
-#ifndef LBLOCK
-#define LBLOCK
+#ifndef LBLOCK_H
+#define LBLOCK_H
 
-#include <vector>
 #include "block.h"
-#include <iostream>
-#include <string>
-#include <sstream>
 
 class LBlock : public Block {
-    int level;
+  int level;
 
-public:
+  public:
     LBlock(Board *b);
 
     void clockwise() override;

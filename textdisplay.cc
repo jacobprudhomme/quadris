@@ -19,11 +19,11 @@ TextDisplay::TextDisplay():
     track = -1;
   }
 
-  void TextDisplay::notify(Subject &whoFrom) {
+void TextDisplay::notify(Subject &whoFrom) {
   vector<vector<Cell>> theBoard = whoFrom.getBoard();
 
   if(whoFrom.getDown() == false){
-   ++track;
+    ++track;
   }
   for (auto &row : gridDisp) {
     for (char &cell : row) {
@@ -39,11 +39,13 @@ TextDisplay::TextDisplay():
 }
 
 ostream &operator<<(ostream &out, TextDisplay &td) {
+  // Print out Score section
   out << "Score: " << Score::instance()->getScore() << endl;
   out << "Hi-Score: " << Score::instance()->getHiScore() << endl;
   out << "Level: " << Score::instance()->getLevel() << endl;
   out << "-----------" << endl;
 
+  // Print out Grid section
   for (auto row : td.getgrid()) {
     for (char cell : row) {
       out << cell;
@@ -51,6 +53,7 @@ ostream &operator<<(ostream &out, TextDisplay &td) {
     out << endl;
   }
 
+  // Print out NextBlock section
   out << "-----------" << endl;
   if (td.getTrack() == -1){
     td.setTrack(0);
@@ -76,24 +79,26 @@ ostream &operator<<(ostream &out, TextDisplay &td) {
     	out << "ZZ" << '\n' << " ZZ";
     }
   }
+
   return out;
 }
 
 int TextDisplay::getTrack() {
-   return track;
+  return track;
 }
 
 bool TextDisplay::getcurrPos() {
- return currPos;
+  return currPos;
 }
 
-void TextDisplay::setTrack(int n){
- track = n;
-}
-void TextDisplay::setcurrPos(bool x){
- currPos= x;
+void TextDisplay::setTrack(int n) {
+  track = n;
 }
 
-std::vector<std::vector<char> > TextDisplay::getgrid() {
-    return gridDisp;
+void TextDisplay::setcurrPos(bool x) {
+  currPos= x;
+}
+
+vector<vector<char>> TextDisplay::getgrid() {
+  return gridDisp;
 }

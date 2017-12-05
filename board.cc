@@ -1,9 +1,9 @@
 #include <iostream>
+#include <algorithm>
+
 #include "board.h"
 #include "cell.h"
-#include <cstddef>
 #include "score.h"
-#include <algorithm>
 
 using namespace std;
 
@@ -11,24 +11,26 @@ Board::~Board () {
   delete td;
 }
 
-Board::Board(int r, int c, int n): rows{r}, cols{c}, numBlock{n} {};
+Board::Board(int r, int c, int n): rows{r}, cols{c}, numBlock{n} {}
 
 void Board::setObserver(Observer* ob) {
-    this->ob = ob;
+  this->ob = ob;
 }
 
 void Board::init() {
-    Score::instance()->setScore(0);
-    Score::instance()->setLevel(0);
-    theBoard.clear();
-    detach();
-    delete td;
+  // Clear all the old stuff
+  Score::instance()->setScore(0);
+  Score::instance()->setLevel(0);
+  theBoard.clear();
+  detach();
+  delete td;
+
   //Initilize the board with default cells
   //Rows: 18 (3 reserved for rotation)
   //columns: 11
-  for(int i = 0; i < rows; ++i) {
+  for (int i = 0; i < rows; ++i) {
     vector<Cell> c;
-    for(int j = 0; j < cols; j++) {
+    for (int j = 0; j < cols; j++) {
       Cell temp{i, j, false, -1, 0};
       c.emplace_back(temp);
     }
@@ -39,7 +41,6 @@ void Board::init() {
   td = new TextDisplay{};
   attach(td);
 }
-
 
 struct xy {
   int id;
@@ -158,9 +159,9 @@ void Board::notify(Subject &whoFrom) {
   }
 
   for (auto &n : whoFrom.getInfo().pos) {
-      theBoard[n.y + 3][n.x].toggle();
-      theBoard[n.y + 3][n.x].setBlockNum(x);
-      theBoard[n.y + 3][n.x].setLevel(lev);
+    theBoard[n.y + 3][n.x].toggle();
+    theBoard[n.y + 3][n.x].setBlockNum(x);
+    theBoard[n.y + 3][n.x].setLevel(lev);
   }
   vector<int> whichRowsFull = whichRowFullDelete();
   calculatingScore(whichRowsFull);
@@ -206,16 +207,16 @@ bool Board::isFull() {
 }
 
 vector<vector<Cell>> Board::getBoard() {
-    return theBoard;
+  return theBoard;
 }
 
 ostream& operator<<(ostream &out, const Board &b) {
-    out << *b.td;
-    return out;
+  out << *b.td;
+  return out;
 }
 
 Info Board::getInfo() {
-    return Info{};
+  return Info{};
 }
 
 void Board::setDown() {
@@ -223,5 +224,5 @@ void Board::setDown() {
 }
 
 bool Board::getDown() {
-    return this->down;
+  return this->down;
 }

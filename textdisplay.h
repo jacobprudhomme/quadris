@@ -12,7 +12,7 @@ class TextDisplay : public Observer {
   std::vector<std::vector<char>> gridDisp;
   int track;
   bool currPos;
-  
+
   public:
     TextDisplay();
 
@@ -21,9 +21,9 @@ class TextDisplay : public Observer {
     bool getcurrPos();
   	void setTrack(int n);
   	void setcurrPos(bool x);
-	std::vector<std::vector<char> > getgrid();
-    friend std::ostream &operator<<(std::ostream &out,  TextDisplay &td);
+	  std::vector<std::vector<char>> getgrid();
+
+    friend std::ostream &operator<<(std::ostream &out, TextDisplay &td);
 };
 
 #endif
-

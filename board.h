@@ -19,21 +19,21 @@ class Board : public Observer, public Subject {
   void deleteRows(std::vector<int> v);
   bool down;
 
- public:
-  ~Board();
-  Board(int r, int c, int n);
-  void setObserver(Observer *ob);
-  void init(); // Sets up an width x height grid.  Clears old grid, if necessary.
-  std::vector<int> whichRowFullDelete(); //checks if any row is full and delet all the rows and move everything
-                             //downwards
-  bool isFull();
-  void notify(Subject &whoFrom); //the block is sent to make changes to the entire grid
-  std::vector<std::vector<Cell>> getBoard();
-  bool getDown() override;
-  void setDown();
-  Info getInfo();
-  
-  friend std::ostream &operator<<(std::ostream &out, const Board &b);
+  public:
+    ~Board();
+    Board(int r, int c, int n);
+    void setObserver(Observer *ob);
+    void init(); // Sets up an width x height grid.  Clears old grid, if necessary.
+    std::vector<int> whichRowFullDelete(); //checks if any row is full and delet all the rows and move everything
+                               //downwards
+    bool isFull();
+    void notify(Subject &whoFrom); //the block is sent to make changes to the entire grid
+    std::vector<std::vector<Cell>> getBoard();
+    bool getDown() override;
+    void setDown();
+    Info getInfo();
+
+    friend std::ostream &operator<<(std::ostream &out, const Board &b);
 };
 
 #endif

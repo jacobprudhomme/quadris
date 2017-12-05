@@ -1,6 +1,5 @@
-#include "zblock.h"
-
 #include <vector>
+#include "zblock.h"
 #include "score.h"
 
 using namespace std;

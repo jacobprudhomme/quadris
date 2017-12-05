@@ -6,5 +6,4 @@ struct Coord {
   int y;
 };
 
-#endif 
-
+#endif
