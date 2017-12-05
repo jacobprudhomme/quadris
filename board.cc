@@ -68,14 +68,14 @@ void Board::calculatingScore(vector<int> v) {
   int score = 0;
   if(xys.size() > 0) {
     for (unsigned int i = 0; i < xys.size() - 1 ; ++i) {
-      if(xys[i].id == xys[i+1].id){
+      if(xys.at(i).id == xys.at(i+1).id){
         counter++;
       } else {
         counter = 0;
       }
       if (counter == 3){
         counter = 0;
-        score += sqr(xys[i].lvl + 1);
+        score += sqr(xys.at(i).lvl + 1);
       }
     }
   }
@@ -91,17 +91,17 @@ void Board::deleteRows(vector<int> v) {
   for (int i : v) {
     for(int x = i; x > 3; --x) {
       for(int j = 0; j < cols; ++j) {
-        theBoard[x][j].setbool(theBoard[x-1][j].isBlock());
-        theBoard[x][j].setBlockNum(theBoard[x-1][j].getBlockNum());
-        theBoard[x][j].setLevel(theBoard[x-1][j].getLevel());
+        theBoard.at(x).at(j).setbool(theBoard.at(x-1).at(j).isBlock());
+        theBoard.at(x).at(j).setBlockNum(theBoard.at(x-1).at(j).getBlockNum());
+        theBoard.at(x).at(j).setLevel(theBoard.at(x-1).at(j).getLevel());
         //we need to set string too but we dont have right now
       }
     }
     //setting the first row
     for(int j = 0; j < cols; ++j) {
-      theBoard[3][j].setbool(false);
-      theBoard[3][j].setBlockNum(-1);
-      theBoard[3][j].setLevel(0);
+      theBoard.at(3).at(j).setbool(false);
+      theBoard.at(3).at(j).setBlockNum(-1);
+      theBoard.at(3).at(j).setLevel(0);
       // level and string for which type of block it it
     }
   }
@@ -126,13 +126,13 @@ void Board::notify(Subject &whoFrom) {
     for (int j = 0; j < cols; ++j) {
       if (counter > size - 1) runThat = false;
       if (runThat) {
-        if (((theBoard[i][j].getC() == whoFrom.getInfo().pos[counter].x) &&
-             (theBoard[i][j].getR() == whoFrom.getInfo().pos[counter].y + 3) &&
-	           (theBoard[i][j].isBlock())) ||
-            (whoFrom.getInfo().pos[counter].x < 0) ||
-            (whoFrom.getInfo().pos[counter].x > 10) ||
-            (whoFrom.getInfo().pos[counter].y + 3 < 0) ||
-            (whoFrom.getInfo().pos[counter].y + 3 > 17))  {
+        if (((theBoard.at(i).at(j).getC() == whoFrom.getInfo().pos.at(counter).x) &&
+             (theBoard.at(i).at(j).getR() == whoFrom.getInfo().pos.at(counter).y + 3) &&
+	           (theBoard.at(i).at(j).isBlock())) ||
+            (whoFrom.getInfo().pos.at(counter).x < 0) ||
+            (whoFrom.getInfo().pos.at(counter).x > 10) ||
+            (whoFrom.getInfo().pos.at(counter).y + 3 < 0) ||
+            (whoFrom.getInfo().pos.at(counter).y + 3 > 17))  {
               counter++;
               down = false;
               return;
@@ -147,11 +147,11 @@ void Board::notify(Subject &whoFrom) {
     for (int j = 0; j < cols; ++j) {
       if (counter > size - 1) runThat = false;
       if (runThat) {
-        int y = theBoard[i][j].getBlockNum();
+        int y = theBoard.at(i).at(j).getBlockNum();
         if (x == y) {
-          theBoard[i][j].setbool(false); //switching the bool to false
-          theBoard[i][j].setBlockNum(-1); //we set the bool to initial val
-          theBoard[i][j].setLevel(0); //initial level i.e -1
+          theBoard.at(i).at(j).setbool(false); //switching the bool to false
+          theBoard.at(i).at(j).setBlockNum(-1); //we set the bool to initial val
+          theBoard.at(i).at(j).setLevel(0); //initial level i.e -1
           counter++;
         }
       }
@@ -159,9 +159,9 @@ void Board::notify(Subject &whoFrom) {
   }
 
   for (auto &n : whoFrom.getInfo().pos) {
-    theBoard[n.y + 3][n.x].toggle();
-    theBoard[n.y + 3][n.x].setBlockNum(x);
-    theBoard[n.y + 3][n.x].setLevel(lev);
+    theBoard.at(n.y + 3).at(n.x).toggle();
+    theBoard.at(n.y + 3).at(n.x).setBlockNum(x);
+    theBoard.at(n.y + 3).at(n.x).setLevel(lev);
   }
   vector<int> whichRowsFull = whichRowFullDelete();
   calculatingScore(whichRowsFull);
@@ -178,7 +178,7 @@ vector<int> Board::whichRowFullDelete() {
   for(int i = 3; i < rows; ++i) {
     int counter = 0;
     for(int j = 0; j < cols; ++j) {
-      if(theBoard[i][j].isBlock() == true) {
+      if(theBoard.at(i).at(j).isBlock() == true) {
         counter++;
       } else {
         break;
@@ -198,7 +198,7 @@ vector<int> Board::whichRowFullDelete() {
 bool Board::isFull() {
   for(int i = 3; i < 6; ++i) {
     for(int j = 0; j < 4; ++j) {
-      if(theBoard[i][j].isBlock()) {
+      if(theBoard.at(i).at(j).isBlock()) {
         return true;
       }
     }
