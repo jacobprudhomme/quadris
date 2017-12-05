@@ -118,19 +118,26 @@ static void inputHelper(Board *obj, Block *&b, string command, int level, int &i
   } else if (hint == command.substr(0,1)) {
     //hint
   } else if (command == "I") {
-    //insert I block
+    b = new IBlock(obj);
+    b->init();
   } else if (command == "J") {
-    //insert J block
+    b = new JBlock(obj);
+    b->init();
   } else if (command == "L") {
-    //insert O block
+    b = new LBlock(obj);
+    b->init();
   } else if (command == "O") {
-    //insert S block
+    b = new OBlock(obj);
+    b->init();
   } else if (command == "S") {
-    //insert Z block
+    b = new SBlock(obj);
+    b->init();
   } else if (command == "T") {
-    //insert T block
+    b = new TBlock(obj);
+    b->init();
   } else if (command == "Z") {
-    //insert L block
+    b = new ZBlock(obj);
+    b->init();
   }
 }
 
